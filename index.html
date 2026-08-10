@@ -101,7 +101,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
     </div>
   </div>
   <div class="video-card">
-    <video autoplay muted loop playsinline controls preload="auto">
+    <video id="baileyVideo" autoplay muted loop playsinline preload="auto">
       <source src="https://baileyanddave.github.io/BaileyandDave/bailey-dave-chasing.mp4" type="video/mp4">
     </video>
   </div>
@@ -179,9 +179,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
   </div>
 </div></section>
 </main>
-
+<script>
+const video = document.getElementById('baileyVideo');
+video.muted = true;
+video.play().catch(() => {});
+</script>
 <footer><div class="wrap">
   <div><strong>BAILEY &amp; DAVE</strong><br><span class="small">One silly sausage. One cheeky pug. Lots of adventures.</span></div>
   <div class="small">© Bailey &amp; Dave. Amazon and social links will be added as the series grows.</div>
 </div></footer>
+  
 </body></html>
