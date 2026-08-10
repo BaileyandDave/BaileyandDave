@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Welcome to the world of Bailey & Dave — one silly sausage, one cheeky pug, and lots of interactive adventures.">
+  <title>Bailey & Dave</title>
+  <style>
+    :root{
+      --ink:#25313c;
+      --cream:#fff9ef;
+      --sky:#bfe8ff;
+      --sun:#ffd76a;
+      --coral:#ff8f79;
+      --mint:#bdebd3;
+      --purple:#8b7edb;
+      --card:#ffffff;
+      --shadow:0 14px 34px rgba(37,49,60,.12);
+      --radius:28px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-rounded, "Trebuchet MS", Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 10% 5%, rgba(255,215,106,.28), transparent 25%),
+        radial-gradient(circle at 90% 8%, rgba(191,232,255,.65), transparent 28%),
+        var(--cream);
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .wrap{width:min(1120px,92vw);margin:auto}
+    header{padding:18px 0}
+    nav{display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{font-weight:900;font-size:clamp(1.35rem,2.5vw,2rem);letter-spacing:.3px}
+    .navlinks{display:flex;gap:14px;flex-wrap:wrap}
+    .navlinks a{text-decoration:none;font-weight:800;font-size:.95rem}
+    .hero{
+      padding:54px 0 30px;
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      align-items:center;
+      gap:34px;
+    }
+    .eyebrow{font-weight:900;color:#765fd0;text-transform:uppercase;letter-spacing:1.6px;font-size:.82rem}
+    h1{font-size:clamp(3rem,8vw,6.4rem);line-height:.91;margin:.2em 0 .18em}
+    .tagline{font-size:clamp(1.15rem,2.3vw,1.6rem);font-weight:800;max-width:650px}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+    .btn{
+      display:inline-block;text-decoration:none;padding:14px 20px;border-radius:999px;
+      font-weight:900;border:2px solid var(--ink);box-shadow:0 5px 0 var(--ink);
+      transition:.15s transform,.15s box-shadow;
+    }
+    .btn:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--ink)}
+    .btn.primary{background:var(--sun)}
+    .btn.alt{background:white}
+    .video-card{
+      background:white;border:3px solid var(--ink);border-radius:36px;padding:12px;
+      box-shadow:var(--shadow);transform:rotate(1deg)
+    }
+    video{width:100%;display:block;border-radius:24px;background:#73c86f}
+    section{padding:62px 0}
+    .section-title{text-align:center;margin-bottom:26px}
+    .section-title h2{font-size:clamp(2rem,5vw,3.5rem);margin:0 0 8px}
+    .section-title p{margin:auto;max-width:720px;font-size:1.08rem}
+    .characters{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+    .character{
+      background:var(--card);border:3px solid var(--ink);border-radius:var(--radius);
+      padding:28px;box-shadow:var(--shadow)
+    }
+    .character.bailey{background:linear-gradient(145deg,#fff 65%,#ffe0d8)}
+    .character.dave{background:linear-gradient(145deg,#fff 65%,#d9f3e5)}
+    .character h3{font-size:1.8rem;margin:.2rem 0}
+    .quote{
+      margin-top:18px;padding:15px 18px;background:var(--cream);
+      border-left:6px solid var(--coral);border-radius:14px;font-weight:900;font-size:1.16rem
+    }
+    .books{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:20px
+    }
+    .book{
+      background:white;border:3px solid var(--ink);border-radius:24px;padding:18px;
+      box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px
+    }
+    .cover-placeholder{
+      aspect-ratio:4/5.5;border-radius:18px;border:3px dashed #798591;
+      display:grid;place-items:center;text-align:center;padding:22px;
+      background:linear-gradient(135deg,#f4f8fa,#fff9ef);font-weight:900;color:#65717c
+    }
+    .book h3{margin:0;font-size:1.28rem}
+    .badge{
+      display:inline-flex;align-self:flex-start;background:#e7dcff;color:#4e3aa8;
+      padding:5px 10px;border-radius:999px;font-size:.78rem;font-weight:900
+    }
+    .help-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .help-card{
+      background:white;border-radius:22px;padding:20px;text-align:center;border:2px solid #e4e8ea
+    }
+    .icon{font-size:2rem}
+    .coming{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:18px
+    }
+    .coming-card{
+      min-height:180px;border-radius:24px;padding:24px;display:flex;flex-direction:column;justify-content:flex-end;
+      border:3px solid var(--ink);box-shadow:var(--shadow);font-weight:900
+    }
+    .beach{background:linear-gradient(#bfe8ff 45%,#ffe6a3 45%)}
+    .zoo{background:linear-gradient(135deg,#ccefcf,#fff0a8)}
+    .london{background:linear-gradient(135deg,#d8e5ff,#ffcbc7)}
+    .memory{
+      background:#fff;border:3px solid var(--ink);border-radius:30px;padding:28px;box-shadow:var(--shadow)
+    }
+    .memory-wall{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px
+    }
+    .frame{
+      aspect-ratio:1/1;background:#f4efe5;border:8px solid #c38c4f;box-shadow:inset 0 0 0 3px #7b522e;
+      display:grid;place-items:center;text-align:center;padding:14px;font-weight:900;transform:rotate(-1deg)
+    }
+    .frame:nth-child(even){transform:rotate(1.5deg)}
+    footer{background:var(--ink);color:white;padding:40px 0;margin-top:40px}
+    footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .small{font-size:.88rem;opacity:.82}
+    @media(max-width:800px){
+      .hero{grid-template-columns:1fr;padding-top:28px}
+      .characters,.books,.coming{grid-template-columns:1fr}
+      .help-grid{grid-template-columns:repeat(2,1fr)}
+      .memory-wall{grid-template-columns:repeat(2,1fr)}
+      .navlinks{display:none}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="brand">BAILEY &amp; DAVE</div>
+      <div class="navlinks">
+        <a href="#meet">Meet the dogs</a>
+        <a href="#books">Books</a>
+        <a href="#help">Join in</a>
+        <a href="#coming">Coming soon</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div>
+      <div class="eyebrow">Ah, there you are!</div>
+      <h1>Welcome to the world of Bailey &amp; Dave</h1>
+      <div class="tagline">One silly sausage. One cheeky pug. Lots of adventures.</div>
+      <p>Interactive picture books where children don't just listen to the story — they help Bailey and Dave along the way.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#books">Choose an adventure</a>
+        <a class="btn alt" href="#meet">Meet Bailey &amp; Dave</a>
+      </div>
+    </div>
+    <div class="video-card">
+      <video autoplay muted loop playsinline>
+        <source src="assets/bailey-dave-chasing.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <section id="meet">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Meet Bailey &amp; Dave</h2>
+        <p>Best friends with very different ideas about what counts as scary.</p>
+      </div>
+      <div class="characters">
+        <article class="character bailey">
+          <div class="eyebrow">Bailey — The Silly Sausage</div>
+          <h3>Timid, lovable and not very good at hiding</h3>
+          <p>Bailey is a miniature dachshund who hears an unfamiliar animal noise and immediately expects the worst. Luckily, his scary aliens usually turn into new friends.</p>
+          <div class="quote">“It’s a scary alien!”</div>
+        </article>
+        <article class="character dave">
+          <div class="eyebrow">Dave — The Cheeky Pug</div>
+          <h3>Brave, calm and always ready to investigate</h3>
+          <p>Dave is Bailey’s best friend. He encourages Bailey, helps solve each adventure and never makes fun of him for being nervous.</p>
+          <div class="quote">Adventure first. T-R-E-A-T-S afterwards.</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="books">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Choose an Adventure</h2>
+        <p>The cover spaces are ready — we'll drop your real cover JPEGs in as soon as your signal behaves.</p>
+      </div>
+      <div class="books">
+        <article class="book">
+          <div class="cover-placeholder">BOOK COVER 1<br><br>Upload later</div>
+          <span class="badge">Kindle edition now available</span>
+          <h3>Bailey and Dave: Silly Sausage and Cheeky Pug</h3>
+          <p>The adventure that introduces Bailey, Dave and the interactive world around them.</p>
+          <a class="btn primary" href="#" aria-label="Amazon link placeholder">Amazon link to add</a>
+        </article>
+        <article class="book">
+          <div class="cover-placeholder">BOOK COVER 2<br><br>Upload later</div>
+          <h3>Bailey and Dave at the Park</h3>
+          <p>A playful interactive adventure at the park.</p>
+          <a class="btn primary" href="#" aria-label="Amazon link placeholder">Amazon link to add</a>
+        </article>
+        <article class="book">
+          <div class="cover-placeholder">BOOK COVER 3<br><br>Upload later</div>
+          <h3>Bailey and Dave Save Christmas</h3>
+          <p>A festive Bailey &amp; Dave adventure with a special Christmas twist.</p>
+          <a class="btn primary" href="#" aria-label="Amazon link placeholder">Amazon link to add</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="help">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Can You Help Bailey &amp; Dave?</h2>
+        <p>Every adventure invites the child into the story.</p>
+      </div>
+      <div class="help-grid">
+        <div class="help-card"><div class="icon">👂</div><strong>Lucky ear tickles</strong><br>Help Bailey feel ready for the adventure.</div>
+        <div class="help-card"><div class="icon">🔎</div><strong>Find things</strong><br>Look closely and point out what the dogs need.</div>
+        <div class="help-card"><div class="icon">🔢</div><strong>Count &amp; discover</strong><br>Some adventures add gentle learning naturally.</div>
+        <div class="help-card"><div class="icon">❤️</div><strong>Make a new friend</strong><br>The scary alien always turns out to be someone worth knowing.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="coming">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Where Are They Going Next?</h2>
+      </div>
+      <div class="coming">
+        <div class="coming-card beach"><div>🏖️</div><h3>Bailey &amp; Dave at the Beach</h3><span>Coming soon</span></div>
+        <div class="coming-card zoo"><div>🦒</div><h3>Bailey &amp; Dave at the Zoo</h3><span>In development</span></div>
+        <div class="coming-card london"><div>🇬🇧</div><h3>Bailey &amp; Dave Visit London</h3><span>Future adventure</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap memory">
+      <div class="section-title">
+        <h2>The Memory Wall</h2>
+        <p>Every adventure leaves Bailey and Dave with a little reminder of the friends they made. As the books grow, the wall will grow too.</p>
+      </div>
+      <div class="memory-wall">
+        <div class="frame">Future memory</div>
+        <div class="frame">Mr Crab<br>Beach memory</div>
+        <div class="frame">Zoo memory</div>
+        <div class="frame">London memory</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <strong>BAILEY &amp; DAVE</strong><br>
+      <span class="small">One silly sausage. One cheeky pug. Lots of adventures.</span>
+    </div>
+    <div class="small">
+      © Bailey &amp; Dave. Social links and Amazon links to be added.
+    </div>
+  </div>
+</footer>
+</body>
+</html>
