@@ -7,7 +7,12 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
+gtag('consent', 'default', {
+  'analytics_storage': 'denied',
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied'
+});
   gtag('config', 'G-36CCQ17569');
 </script>
   <meta charset="utf-8">
@@ -194,5 +199,38 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
   <div><strong>BAILEY &amp; DAVE</strong><br><span class="small">One silly sausage. One cheeky pug. Lots of adventures.</span></div>
   <div class="small">© Bailey &amp; Dave. Amazon and social links will be added as the series grows.</div>
 </div></footer>
-  
+
+  <div id="cookie-banner" style="position:fixed;bottom:0;left:0;right:0;background:#fff9ef;border-top:3px solid #25313c;padding:16px;z-index:9999;text-align:center;">
+  <strong>Cookies on Bailey &amp; Dave</strong>
+  <p style="margin:8px 0;">We use Google Analytics to understand how visitors use our website. You can accept or reject analytics cookies.</p>
+  <button onclick="acceptAnalytics()" style="padding:10px 16px;margin:5px;font-weight:bold;">Accept analytics</button>
+  <button onclick="rejectAnalytics()" style="padding:10px 16px;margin:5px;font-weight:bold;">Reject</button>
+</div>
+
+<script>
+function acceptAnalytics() {
+  gtag('consent', 'update', {
+    'analytics_storage': 'granted'
+  });
+  localStorage.setItem('analyticsConsent', 'granted');
+  document.getElementById('cookie-banner').style.display = 'none';
+}
+
+function rejectAnalytics() {
+  gtag('consent', 'update', {
+    'analytics_storage': 'denied'
+  });
+  localStorage.setItem('analyticsConsent', 'denied');
+  document.getElementById('cookie-banner').style.display = 'none';
+}
+
+const savedConsent = localStorage.getItem('analyticsConsent');
+
+if (savedConsent === 'granted') {
+  gtag('consent', 'update', {'analytics_storage': 'granted'});
+  document.getElementById('cookie-banner').style.display = 'none';
+} else if (savedConsent === 'denied') {
+  document.getElementById('cookie-banner').style.display = 'none';
+}
+</script>
 </body></html>
