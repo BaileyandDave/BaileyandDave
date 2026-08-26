@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-36CCQ17569"></script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied',
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied'
+  });
+
+  gtag('js', new Date());
+  gtag('config', 'G-36CCQ17569');
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Adventures | Bailey &amp; Dave</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#fffaf0;
+  color:#25313c;
+}
+
+.wrap{
+  width:min(1050px,92%);
+  margin:auto;
+}
+
+/* HEADER */
+
+header{
+  background:linear-gradient(135deg,#eee6ff,#fff0b8);
+  padding:35px 0;
+  text-align:center;
+}
+
+header h1{
+  margin:0;
+  font-size:38px;
+}
+
+header p{
+  font-size:18px;
+  margin:10px auto 0;
+  max-width:700px;
+  line-height:1.5;
+}
+
+nav{
+  margin-top:20px;
+}
+
+nav a{
+  display:inline-block;
+  margin:5px;
+  padding:10px 16px;
+  text-decoration:none;
+  color:#25313c;
+  background:white;
+  border-radius:20px;
+  font-weight:bold;
+}
+
+/* MAIN */
+
+main{
+  padding:45px 0 60px;
+}
+
+.intro{
+  text-align:center;
+  max-width:760px;
+  margin:0 auto 40px;
+}
+
+.intro h2{
+  font-size:30px;
+}
+
+.intro p{
+  font-size:17px;
+  line-height:1.7;
+}
+
+/* ADVENTURES */
+
+.adventure-list{
+  display:grid;
+  gap:24px;
+}
+
+.adventure-card{
+  display:grid;
+  grid-template-columns:170px 1fr;
+  gap:25px;
+  align-items:center;
+  background:white;
+  border-radius:20px;
+  padding:24px;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+}
+
+.adventure-number{
+  width:130px;
+  height:130px;
+  margin:auto;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff0b8;
+  font-size:50px;
+  font-weight:bold;
+}
+
+.adventure-content h2{
+  margin:0 0 8px;
+  font-size:27px;
+}
+
+.memory{
+  font-weight:bold;
+  margin:8px 0 12px;
+}
+
+.adventure-content p{
+  line-height:1.6;
+}
+
+.button{
+  display:inline-block;
+  margin-top:10px;
+  padding:11px 18px;
+  background:#25313c;
+  color:white;
+  text-decoration:none;
+  border-radius:20px;
+  font-weight:bold;
+}
+
+/* ZOO */
+
+.coming{
+  background:linear-gradient(135deg,#e6f6d9,#fff0b8);
+}
+
+.coming .adventure-number{
+  background:white;
+}
+
+.coming-badge{
+  display:inline-block;
+  margin-top:10px;
+  padding:9px 16px;
+  border-radius:18px;
+  background:white;
+  font-weight:bold;
+}
+
+/* FUTURE */
+
+.future{
+  margin-top:40px;
+  padding:30px;
+  text-align:center;
+  background:#eee6ff;
+  border-radius:20px;
+}
+
+.future h2{
+  margin-top:0;
+  font-size:30px;
+}
+
+/* MEMORY */
+
+.memory-note{
+  margin-top:35px;
+  background:white;
+  border-radius:18px;
+  padding:25px;
+  text-align:center;
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+/* FOOTER */
+
+footer{
+  background:#25313c;
+  color:white;
+  padding:30px 0;
+}
+
+footer .wrap{
+  display:flex;
+  justify-content:space-between;
+  gap:25px;
+  align-items:flex-start;
+}
+
+.small{
+  font-size:13px;
+  line-height:1.5;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+  header h1{
+    font-size:30px;
+  }
+
+  .adventure-card{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  footer .wrap{
+    display:block;
+    text-align:center;
+  }
+
+  footer .small{
+    margin-top:15px;
+  }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<header>
+
+<div class="wrap">
+
+  <h1>📚 Our Adventures</h1>
+
+  <p>
+    Every Bailey &amp; Dave story begins somewhere new,
+    brings a few surprises and leaves another memory behind.
+  </p>
+
+  <nav>
+    <a href="index.html">🏠 Home</a>
+  </nav>
+
+</div>
+
+</header>
+
+
+<main class="wrap">
+
+
+<section class="intro">
+
+  <h2>The Adventure So Far...</h2>
+
+  <p>
+    Bailey the silly sausage and Dave the cheeky pug
+    have already been on quite a few adventures.
+  </p>
+
+  <p>
+    And somehow, Bailey keeps finding scary aliens along the way!
+  </p>
+
+</section>
+
+
+<section class="adventure-list">
+
+
+<!-- BOOK 1 -->
+
+<div class="adventure-card">
+
+  <div class="adventure-number">1</div>
+
+  <div class="adventure-content">
+
+    <h2>Bailey and Dave<br>
+    Silly Sausage and Cheeky Pug</h2>
+
+    <div class="memory">🐱 Memory: Sparkle</div>
+
+    <p>
+      This is where the Bailey &amp; Dave adventures begin.
+      Meet Bailey the silly sausage and Dave the cheeky pug
+      and discover what happens when Bailey thinks something
+      rather unexpected might be a scary alien.
+    </p>
+
+    <a href="https://amzn.eu/d/0fRtiYjL"
+       class="button">
+       Buy on Amazon
+    </a>
+
+  </div>
+
+</div>
+
+
+<!-- CHRISTMAS -->
+
+<div class="adventure-card">
+
+  <div class="adventure-number">2</div>
+
+  <div class="adventure-content">
+
+    <h2>Bailey &amp; Dave Save Christmas</h2>
+
+    <div class="memory">🎄 Memory: Rudolph</div>
+
+    <p>
+      Christmas brings a brand-new adventure for Bailey and Dave,
+      with festive surprises, helping hands and another very special
+      friend to remember.
+    </p>
+
+    <a href="https://amzn.eu/d/0ic8WjaA"
+       class="button">
+       Buy on Amazon
+    </a>
+
+  </div>
+
+</div>
+
+
+<!-- PARK -->
+
+<div class="adventure-card">
+
+  <div class="adventure-number">3</div>
+
+  <div class="adventure-content">
+
+    <h2>Bailey &amp; Dave at the Park</h2>
+
+    <div class="memory">🦆 Memory: Ducky</div>
+
+    <p>
+      A trip to the park becomes another playful adventure
+      full of surprises, searching and a memorable new friend.
+    </p>
+
+    <a href="https://amzn.eu/d/0dtFh27V"
+       class="button">
+       Buy on Amazon
+    </a>
+
+  </div>
+
+</div>
+
+
+<!-- BEACH -->
+
+<div class="adventure-card">
+
+  <div class="adventure-number">4</div>
+
+  <div class="adventure-content">
+
+    <h2>Bailey &amp; Dave at the Beach</h2>
+
+    <div class="memory">🦀 Memory: Mr Crab</div>
+
+    <p>
+      Bailey and Dave head to the seaside for an adventure
+      involving treasure, treats and one rather surprising
+      new friend.
+    </p>
+
+    <a href="https://amzn.eu/d/04A4x4qe"
+       class="button">
+       Buy on Amazon
+    </a>
+
+  </div>
+
+</div>
+
+
+<!-- ZOO -->
+
+<div class="adventure-card coming">
+
+  <div class="adventure-number">5</div>
+
+  <div class="adventure-content">
+
+    <h2>Bailey &amp; Dave at the Zoo</h2>
+
+    <div class="memory">🦥 Future Memory: Marvin</div>
+
+    <p>
+      Bailey and Dave are getting ready for their next adventure...
+      and this one involves animals, binoculars, counting
+      and one extremely slow new friend.
+    </p>
+
+    <span class="coming-badge">
+      In development
+    </span>
+
+  </div>
+
+</div>
+
+
+</section>
+
+
+<section class="future">
+
+  <h2>❓ Where Are They Going Next?</h2>
+
+  <p>
+    The Zoo is only the beginning.
+  </p>
+
+  <p>
+    More Bailey &amp; Dave adventures are already waiting
+    somewhere beyond the Memory Wall.
+  </p>
+
+</section>
+
+
+<section class="memory-note">
+
+  <h2>🖼️ Every Adventure Leaves a Memory</h2>
+
+  <p>
+    The friends Bailey and Dave meet become part of their
+    Memory Wall — and the wall grows every time a new adventure begins.
+  </p>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+<div class="wrap">
+
+  <div>
+
+    <strong>BAILEY &amp; DAVE</strong><br>
+
+    <span class="small">
+      One silly sausage. One cheeky pug. Lots of adventures.
+    </span>
+
+  </div>
+
+
+  <div class="small">
+
+    © 2026 Bailey &amp; Dave. All rights reserved.<br>
+
+    Bailey &amp; Dave, their characters, stories, illustrations
+    and adventures are protected by copyright.<br>
+
+    Please don't copy or use them without permission —
+    not even for a bag of t-words. 🐾
+
+  </div>
+
+</div>
+
+</footer>
+
+
+<!-- COOKIE BANNER -->
+
+<div id="cookie-banner"
+style="position:fixed;bottom:0;left:0;right:0;background:#fff9ef;
+border-top:3px solid #25313c;padding:16px;z-index:9999;text-align:center;">
+
+<strong>Cookies on Bailey &amp; Dave</strong>
+
+<p style="margin:8px 0;">
+We use Google Analytics to understand how visitors use our website.
+You can accept or reject analytics cookies.
+</p>
+
+<button onclick="acceptAnalytics()"
+style="padding:10px 16px;margin:5px;font-weight:bold;">
+Accept analytics
+</button>
+
+<button onclick="rejectAnalytics()"
+style="padding:10px 16px;margin:5px;font-weight:bold;">
+Reject
+</button>
+
+</div>
+
+
+<script>
+
+function acceptAnalytics(){
+
+  gtag('consent','update',{
+    'analytics_storage':'granted'
+  });
+
+  localStorage.setItem('analyticsConsent','granted');
+
+  document.getElementById('cookie-banner').style.display='none';
+}
+
+
+function rejectAnalytics(){
+
+  gtag('consent','update',{
+    'analytics_storage':'denied'
+  });
+
+  localStorage.setItem('analyticsConsent','denied');
+
+  document.getElementById('cookie-banner').style.display='none';
+}
+
+
+const savedConsent =
+localStorage.getItem('analyticsConsent');
+
+
+if(savedConsent === 'granted'){
+
+  gtag('consent','update',{
+    'analytics_storage':'granted'
+  });
+
+  document.getElementById('cookie-banner').style.display='none';
+
+}
+
+else if(savedConsent === 'denied'){
+
+  document.getElementById('cookie-banner').style.display='none';
+
+}
+
+</script>
+
+
+</body>
+</html>
