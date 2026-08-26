@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The T-Word Hunt | Bailey &amp; Dave</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#fffaf0;
+  color:#25313c;
+  text-align:center;
+}
+
+.wrap{
+  width:min(900px,94%);
+  margin:auto;
+}
+
+/* HEADER */
+
+header{
+  background:linear-gradient(135deg,#eee6ff,#fff0b8);
+  padding:28px 15px;
+}
+
+header h1{
+  margin:0;
+  font-size:38px;
+}
+
+header p{
+  font-size:18px;
+  margin-bottom:0;
+}
+
+/* MAIN */
+
+main{
+  padding:35px 0 60px;
+}
+
+.instructions{
+  max-width:680px;
+  margin:0 auto 25px;
+  font-size:18px;
+  line-height:1.6;
+}
+
+/* COUNTER */
+
+.counter{
+  display:inline-block;
+  background:white;
+  padding:12px 22px;
+  border-radius:22px;
+  font-size:20px;
+  font-weight:bold;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+  margin-bottom:20px;
+}
+
+/* GAME */
+
+.game{
+  position:relative;
+  max-width:760px;
+  height:440px;
+  margin:0 auto;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 8px 25px rgba(0,0,0,.15);
+
+  background:
+    linear-gradient(
+      #c7ecff 0%,
+      #c7ecff 55%,
+      #a8db83 55%,
+      #a8db83 100%
+    );
+}
+
+/* DECORATIONS */
+
+.object{
+  position:absolute;
+  font-size:70px;
+  user-select:none;
+}
+
+.tree{
+  left:6%;
+  bottom:50px;
+}
+
+.bench{
+  left:37%;
+  bottom:45px;
+}
+
+.bush{
+  right:5%;
+  bottom:40px;
+}
+
+.ball{
+  left:62%;
+  bottom:85px;
+  font-size:48px;
+}
+
+.flower{
+  left:25%;
+  bottom:25px;
+  font-size:45px;
+}
+
+/* T-WORDS */
+
+.tword{
+  position:absolute;
+  border:none;
+  background:none;
+  font-size:38px;
+  cursor:pointer;
+  padding:10px;
+  transition:
+    transform .2s,
+    opacity .25s;
+}
+
+.tword:hover{
+  transform:scale(1.2);
+}
+
+.tword.found{
+  opacity:0;
+  pointer-events:none;
+  transform:scale(1.8);
+}
+
+/* HIDING POSITIONS */
+
+#tword1{
+  left:9%;
+  bottom:65px;
+}
+
+#tword2{
+  left:43%;
+  bottom:75px;
+}
+
+#tword3{
+  right:8%;
+  bottom:70px;
+}
+
+#tword4{
+  left:64%;
+  top:90px;
+}
+
+#tword5{
+  left:25%;
+  top:170px;
+}
+
+/* MESSAGE */
+
+#message{
+  min-height:55px;
+  margin:20px auto 0;
+  max-width:600px;
+  font-size:19px;
+  font-weight:bold;
+}
+
+/* FINISHED */
+
+#finished{
+  display:none;
+  margin:25px auto 0;
+  max-width:650px;
+  background:#fff0b8;
+  border-radius:22px;
+  padding:28px;
+}
+
+#finished h2{
+  margin-top:0;
+  font-size:28px;
+}
+
+/* BUTTON */
+
+.game-button{
+  border:none;
+  background:#25313c;
+  color:white;
+  padding:12px 22px;
+  border-radius:22px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+  header h1{
+    font-size:30px;
+  }
+
+  .game{
+    height:380px;
+  }
+
+  .object{
+    font-size:55px;
+  }
+
+  .tword{
+    font-size:34px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>🦴 The T-Word Hunt</h1>
+
+<p>Shhh... don't say it too loudly.</p>
+
+</header>
+
+
+<main class="wrap">
+
+
+<section class="instructions">
+
+<p>
+Oh no!
+</p>
+
+<p>
+Someone has hidden Bailey and Dave's
+<strong>T-words</strong> around the park.
+</p>
+
+<p>
+Can you find all five before Bailey starts worrying?
+</p>
+
+</section>
+
+
+<div class="counter">
+
+T-words found:
+<span id="count">0</span> / 5
+
+</div>
+
+
+<div class="game" id="game">
+
+
+<!-- PARK DECORATIONS -->
+
+<div class="object tree">🌳</div>
+
+<div class="object bench">🪑</div>
+
+<div class="object bush">🌿</div>
+
+<div class="object ball">⚽</div>
+
+<div class="object flower">🌼</div>
+
+
+<!-- HIDDEN T-WORDS -->
+
+<button
+class="tword"
+id="tword1"
+aria-label="Hidden T-word"
+onclick="findTword(this)">
+🦴
+</button>
+
+
+<button
+class="tword"
+id="tword2"
+aria-label="Hidden T-word"
+onclick="findTword(this)">
+🦴
+</button>
+
+
+<button
+class="tword"
+id="tword3"
+aria-label="Hidden T-word"
+onclick="findTword(this)">
+🦴
+</button>
+
+
+<button
+class="tword"
+id="tword4"
+aria-label="Hidden T-word"
+onclick="findTword(this)">
+🦴
+</button>
+
+
+<button
+class="tword"
+id="tword5"
+aria-label="Hidden T-word"
+onclick="findTword(this)">
+🦴
+</button>
+
+
+</div>
+
+
+<div id="message">
+
+Dave says: "They're around here somewhere..."
+
+</div>
+
+
+<div id="finished">
+
+<h2>🎉 You found all the T-words!</h2>
+
+<p>
+Brilliant searching!
+</p>
+
+<p>
+Bailey is very relieved.
+</p>
+
+<p>
+Dave would like to remind Bailey that
+<strong>sharing is important.</strong>
+</p>
+
+<p>
+Bailey appears not to have heard him.
+</p>
+
+<button
+class="game-button"
+onclick="restartGame()">
+Play Again 🐾
+</button>
+
+</div>
+
+
+</main>
+
+
+<script>
+
+let found = 0;
+
+const messages = [
+  "",
+  "Good start! Bailey has definitely noticed.",
+  "Two! Dave says keep looking.",
+  "Three! Bailey is getting very excited.",
+  "Four! Just one T-word left...",
+  "You found them all!"
+];
+
+
+function findTword(item){
+
+  if(item.classList.contains("found")){
+    return;
+  }
+
+  item.classList.add("found");
+
+  found++;
+
+  document.getElementById("count").textContent = found;
+
+  document.getElementById("message").textContent =
+    messages[found];
+
+  if(found === 5){
+
+    setTimeout(function(){
+
+      document.getElementById("finished").style.display =
+        "block";
+
+      document.getElementById("message").style.display =
+        "none";
+
+    },400);
+
+  }
+
+}
+
+
+function restartGame(){
+
+  found = 0;
+
+  document.getElementById("count").textContent = "0";
+
+  document.getElementById("message").style.display =
+    "block";
+
+  document.getElementById("message").textContent =
+    'Dave says: "They\'re around here somewhere..."';
+
+  document.getElementById("finished").style.display =
+    "none";
+
+  const twords =
+    document.querySelectorAll(".tword");
+
+  twords.forEach(function(item){
+
+    item.classList.remove("found");
+
+  });
+
+}
+
+</script>
+
+
+</body>
+
+</html>
