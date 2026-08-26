@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-36CCQ17569"></script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied',
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied'
+  });
+
+  gtag('js', new Date());
+  gtag('config', 'G-36CCQ17569');
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Meet Bailey & Dave</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#fffaf0;
+  color:#25313c;
+}
+
+.wrap{
+  width:min(1100px,92%);
+  margin:auto;
+}
+
+/* HEADER */
+
+header{
+  background:linear-gradient(135deg,#eee6ff,#fff0b8);
+  padding:30px 0;
+  text-align:center;
+}
+
+header h1{
+  margin:0;
+  font-size:38px;
+}
+
+header p{
+  font-size:18px;
+  margin:10px 0 0;
+}
+
+nav{
+  margin-top:20px;
+}
+
+nav a{
+  display:inline-block;
+  margin:5px;
+  padding:10px 16px;
+  text-decoration:none;
+  color:#25313c;
+  background:white;
+  border-radius:20px;
+  font-weight:bold;
+}
+
+/* MAIN */
+
+main{
+  padding:45px 0 60px;
+}
+
+.intro{
+  text-align:center;
+  max-width:750px;
+  margin:0 auto 40px;
+}
+
+.intro h2{
+  font-size:30px;
+  margin-bottom:12px;
+}
+
+.intro p{
+  font-size:17px;
+  line-height:1.6;
+}
+
+/* BAILEY & DAVE */
+
+.character-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:25px;
+}
+
+.character-card{
+  background:white;
+  border-radius:20px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+}
+
+.character-icon{
+  font-size:70px;
+}
+
+.character-card h2{
+  font-size:28px;
+  margin:12px 0 5px;
+}
+
+.nickname{
+  font-size:19px;
+  font-weight:bold;
+  margin-bottom:18px;
+}
+
+.character-card p{
+  font-size:16px;
+  line-height:1.6;
+}
+
+/* FRIENDS */
+
+.friends{
+  margin-top:50px;
+  text-align:center;
+}
+
+.friends h2{
+  font-size:30px;
+}
+
+.friends-intro{
+  max-width:700px;
+  margin:0 auto 25px;
+  line-height:1.6;
+}
+
+.friend-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+
+.friend-card{
+  background:#fff0b8;
+  border-radius:18px;
+  padding:22px;
+}
+
+.friend-icon{
+  font-size:50px;
+}
+
+.friend-card h3{
+  margin:8px 0;
+}
+
+.friend-card p{
+  line-height:1.5;
+}
+
+/* FUTURE FRIEND */
+
+.future{
+  background:#eee6ff;
+  border:2px dashed #25313c;
+}
+
+/* MESSAGE */
+
+.memory-message{
+  margin-top:45px;
+  padding:25px;
+  text-align:center;
+  background:white;
+  border-radius:18px;
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+.memory-message h2{
+  margin-top:0;
+}
+
+/* FOOTER */
+
+footer{
+  background:#25313c;
+  color:white;
+  padding:30px 0;
+}
+
+footer .wrap{
+  display:flex;
+  justify-content:space-between;
+  gap:25px;
+  align-items:flex-start;
+}
+
+.small{
+  font-size:13px;
+  line-height:1.5;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+  header h1{
+    font-size:30px;
+  }
+
+  .character-grid{
+    grid-template-columns:1fr;
+  }
+
+  .friend-grid{
+    grid-template-columns:1fr;
+  }
+
+  footer .wrap{
+    display:block;
+    text-align:center;
+  }
+
+  footer .small{
+    margin-top:15px;
+  }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<header>
+
+  <div class="wrap">
+
+    <h1>🐾 Meet Bailey &amp; Dave 🐾</h1>
+
+    <p>One silly sausage. One cheeky pug. Lots of adventures.</p>
+
+    <nav>
+      <a href="index.html">🏠 Home</a>
+      <a href="activities.html">🧩 Activities</a>
+      <a href="characters.html">🐾 Characters</a>
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main class="wrap">
+
+<section class="intro">
+
+  <h2>Say Hello!</h2>
+
+  <p>
+    Meet Bailey and Dave — two best friends who somehow manage
+    to find an adventure wherever they go.
+  </p>
+
+  <p>
+    Along the way they meet lots of new friends...
+    although Bailey isn't always quite so sure about them at first!
+  </p>
+
+</section>
+
+
+<section class="character-grid">
+
+  <!-- BAILEY -->
+
+  <div class="character-card">
+
+    <div class="character-icon">🐕</div>
+
+    <h2>Bailey</h2>
+
+    <div class="nickname">The Silly Sausage</div>
+
+    <p>
+      Bailey is a miniature dachshund with a big imagination.
+    </p>
+
+    <p>
+      Strange noises, mysterious creatures and unexpected visitors
+      can sometimes mean only one thing...
+    </p>
+
+    <p>
+      <strong>"It's a scary alien!"</strong>
+    </p>
+
+    <p>
+      Luckily, Bailey has Dave — and you — to help discover
+      what's really going on.
+    </p>
+
+  </div>
+
+
+  <!-- DAVE -->
+
+  <div class="character-card">
+
+    <div class="character-icon">🐶</div>
+
+    <h2>Dave</h2>
+
+    <div class="nickname">The Cheeky Pug</div>
+
+    <p>
+      Dave is Bailey's best friend and usually the braver of the two.
+    </p>
+
+    <p>
+      He's curious, playful and always ready to investigate whatever
+      strange thing Bailey has decided must be an alien.
+    </p>
+
+    <p>
+      Of course, Dave has his own priorities too...
+    </p>
+
+    <p>
+      Especially when somebody mentions the
+      <strong>T-word!</strong>
+    </p>
+
+  </div>
+
+</section>
+
+
+<section class="friends">
+
+  <h2>Friends We've Met</h2>
+
+  <p class="friends-intro">
+    Every Bailey &amp; Dave adventure brings new places,
+    new surprises and sometimes a brand-new friend.
+  </p>
+
+
+  <div class="friend-grid">
+
+    <div class="friend-card">
+
+      <div class="friend-icon">🦆</div>
+
+      <h3>Our Park Friend</h3>
+
+      <p>
+        One of the friends Bailey and Dave meet during their adventures at the park.
+      </p>
+
+    </div>
+
+
+    <div class="friend-card">
+
+      <div class="friend-icon">🦀</div>
+
+      <h3>Mr Crab</h3>
+
+      <p>
+        A rather surprising seaside friend from
+        Bailey &amp; Dave at the Beach.
+      </p>
+
+    </div>
+
+
+    <div class="friend-card future">
+
+      <div class="friend-icon">❓</div>
+
+      <h3>Who's Next?</h3>
+
+      <p>
+        Bailey and Dave have plenty more adventures ahead.
+        Who will they meet next?
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="memory-message">
+
+  <h2>Every Friend Becomes Part of the Story ❤️</h2>
+
+  <p>
+    As Bailey and Dave's adventures grow, so will their group of friends.
+  </p>
+
+  <p>
+    Look out for them on the Bailey &amp; Dave Memory Wall!
+  </p>
+
+</section>
+
+</main>
+
+
+<footer>
+
+<div class="wrap">
+
+  <div>
+
+    <strong>BAILEY &amp; DAVE</strong><br>
+
+    <span class="small">
+      One silly sausage. One cheeky pug. Lots of adventures.
+    </span>
+
+  </div>
+
+
+  <div class="small">
+
+    © 2026 Bailey &amp; Dave. All rights reserved.<br>
+
+    Bailey &amp; Dave, their characters, stories, illustrations
+    and adventures are protected by copyright.<br>
+
+    Please don't copy or use them without permission —
+    not even for a bag of t-words. 🐾
+
+  </div>
+
+</div>
+
+</footer>
+
+
+<!-- COOKIE BANNER -->
+
+<div id="cookie-banner"
+style="position:fixed;bottom:0;left:0;right:0;background:#fff9ef;
+border-top:3px solid #25313c;padding:16px;z-index:9999;text-align:center;">
+
+<strong>Cookies on Bailey &amp; Dave</strong>
+
+<p style="margin:8px 0;">
+We use Google Analytics to understand how visitors use our website.
+You can accept or reject analytics cookies.
+</p>
+
+<button onclick="acceptAnalytics()"
+style="padding:10px 16px;margin:5px;font-weight:bold;">
+Accept analytics
+</button>
+
+<button onclick="rejectAnalytics()"
+style="padding:10px 16px;margin:5px;font-weight:bold;">
+Reject
+</button>
+
+</div>
+
+
+<script>
+
+function acceptAnalytics(){
+
+  gtag('consent','update',{
+    'analytics_storage':'granted'
+  });
+
+  localStorage.setItem('analyticsConsent','granted');
+
+  document.getElementById('cookie-banner').style.display='none';
+}
+
+
+function rejectAnalytics(){
+
+  gtag('consent','update',{
+    'analytics_storage':'denied'
+  });
+
+  localStorage.setItem('analyticsConsent','denied');
+
+  document.getElementById('cookie-banner').style.display='none';
+}
+
+
+const savedConsent =
+localStorage.getItem('analyticsConsent');
+
+
+if(savedConsent === 'granted'){
+
+  gtag('consent','update',{
+    'analytics_storage':'granted'
+  });
+
+  document.getElementById('cookie-banner').style.display='none';
+
+}
+
+else if(savedConsent === 'denied'){
+
+  document.getElementById('cookie-banner').style.display='none';
+
+}
+
+</script>
+
+
+</body>
+</html>
