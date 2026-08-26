@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Where's Bailey? | Bailey & Dave</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fffaf0;
+  color: #25313c;
+  text-align: center;
+}
+
+.wrap {
+  width: min(900px, 94%);
+  margin: auto;
+}
+
+header {
+  background: linear-gradient(135deg,#eee6ff,#fff0b8);
+  padding: 28px 15px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 38px;
+}
+
+header p {
+  font-size: 18px;
+}
+
+main {
+  padding: 35px 0 60px;
+}
+
+.instructions {
+  max-width: 650px;
+  margin: 0 auto 25px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* GAME AREA */
+
+.game {
+  position: relative;
+  max-width: 760px;
+  height: 440px;
+  margin: 20px auto;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,.15);
+  background: #dff4ff;
+}
+
+/* SCENES */
+
+.scene {
+  position: absolute;
+  inset: 0;
+  display: none;
+  padding: 30px;
+}
+
+.scene.active {
+  display: block;
+}
+
+.scene h2 {
+  background: rgba(255,255,255,.9);
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 20px;
+}
+
+/* TEMPORARY BACKGROUNDS */
+
+.living-room {
+  background: linear-gradient(#f6dfba 65%, #c99968 65%);
+}
+
+.park {
+  background: linear-gradient(#bde9ff 55%, #9fd77d 55%);
+}
+
+.beach {
+  background: linear-gradient(#bde9ff 48%, #f5df9b 48%);
+}
+
+.zoo {
+  background: linear-gradient(#d9f2ff 50%, #a9d58b 50%);
+}
+
+/* DECORATIONS */
+
+.big-icon {
+  position: absolute;
+  font-size: 80px;
+}
+
+.icon1 { left: 8%; bottom: 35px; }
+.icon2 { right: 8%; bottom: 40px; }
+.icon3 { left: 42%; bottom: 50px; }
+
+/* BAILEY */
+
+.bailey {
+  position: absolute;
+  border: none;
+  background: none;
+  font-size: 46px;
+  cursor: pointer;
+  padding: 10px;
+  transition: transform .2s;
+}
+
+.bailey:hover {
+  transform: scale(1.15);
+}
+
+/* DIFFERENT HIDING PLACES */
+
+#bailey1 {
+  right: 8%;
+  bottom: 65px;
+}
+
+#bailey2 {
+  left: 12%;
+  bottom: 80px;
+}
+
+#bailey3 {
+  right: 18%;
+  bottom: 45px;
+}
+
+#bailey4 {
+  left: 47%;
+  bottom: 80px;
+}
+
+/* SUCCESS BOX */
+
+#success {
+  display: none;
+  margin: 25px auto 0;
+  max-width: 600px;
+  background: #fff0b8;
+  padding: 22px;
+  border-radius: 20px;
+}
+
+#success h2 {
+  margin-top: 0;
+}
+
+.next-button {
+  display: inline-block;
+  border: none;
+  background: #25313c;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 22px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* FINISH */
+
+#finished {
+  display: none;
+  background: #eee6ff;
+  padding: 30px;
+  border-radius: 22px;
+  max-width: 650px;
+  margin: 30px auto;
+}
+
+/* MOBILE */
+
+@media(max-width:700px) {
+
+  header h1 {
+    font-size: 30px;
+  }
+
+  .game {
+    height: 380px;
+  }
+
+  .big-icon {
+    font-size: 60px;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+  <h1>🔎 Where's Bailey?</h1>
+
+  <p>Can you find the silly sausage?</p>
+
+</header>
+
+
+<main class="wrap">
+
+<div class="instructions">
+
+  <p>
+    Oh dear... Bailey has wandered off again!
+  </p>
+
+  <p>
+    Look carefully at each scene and tap Bailey when you find him.
+  </p>
+
+</div>
+
+
+<div class="game" id="game">
+
+  <!-- SCENE 1 -->
+
+  <div class="scene living-room active" id="scene1">
+
+    <h2>🏠 Bailey's House</h2>
+
+    <div class="big-icon icon1">🛋️</div>
+    <div class="big-icon icon3">🪴</div>
+
+    <button class="bailey" id="bailey1"
+      onclick="foundBailey()">🐕</button>
+
+  </div>
+
+
+  <!-- SCENE 2 -->
+
+  <div class="scene park" id="scene2">
+
+    <h2>🌳 The Park</h2>
+
+    <div class="big-icon icon1">🌳</div>
+    <div class="big-icon icon2">🛝</div>
+
+    <button class="bailey" id="bailey2"
+      onclick="foundBailey()">🐕</button>
+
+  </div>
+
+
+  <!-- SCENE 3 -->
+
+  <div class="scene beach" id="scene3">
+
+    <h2>🏖️ The Beach</h2>
+
+    <div class="big-icon icon1">🏖️</div>
+    <div class="big-icon icon2">🦀</div>
+    <div class="big-icon icon3">🏰</div>
+
+    <button class="bailey" id="bailey3"
+      onclick="foundBailey()">🐕</button>
+
+  </div>
+
+
+  <!-- SCENE 4 -->
+
+  <div class="scene zoo" id="scene4">
+
+    <h2>🦒 The Zoo</h2>
+
+    <div class="big-icon icon1">🦒</div>
+    <div class="big-icon icon2">🦁</div>
+    <div class="big-icon icon3">🗑️</div>
+
+    <button class="bailey" id="bailey4"
+      onclick="foundBailey()">🐕</button>
+
+  </div>
+
+</div>
+
+
+<div id="success">
+
+  <h2>🎉 You found the silly sausage!</h2>
+
+  <p>
+    Well done! Bailey thought he had found a brilliant hiding place.
+  </p>
+
+  <button class="next-button" onclick="nextScene()">
+    Next Adventure 🐾
+  </button>
+
+</div>
+
+
+<div id="finished">
+
+  <h2>🏆 Brilliant!</h2>
+
+  <p>
+    You found Bailey every single time!
+  </p>
+
+  <p>
+    Dave knew you could do it.
+  </p>
+
+  <p>
+    Bailey might need to practise his hiding...
+  </p>
+
+  <button class="next-button" onclick="restartGame()">
+    Play Again
+  </button>
+
+</div>
+
+
+</main>
+
+
+<script>
+
+let currentScene = 1;
+const totalScenes = 4;
+
+function foundBailey() {
+
+  document.getElementById("success").style.display = "block";
+
+}
+
+
+function nextScene() {
+
+  document.getElementById("success").style.display = "none";
+
+  document
+    .getElementById("scene" + currentScene)
+    .classList.remove("active");
+
+  currentScene++;
+
+  if(currentScene <= totalScenes) {
+
+    document
+      .getElementById("scene" + currentScene)
+      .classList.add("active");
+
+  } else {
+
+    document.getElementById("game").style.display = "none";
+    document.getElementById("finished").style.display = "block";
+
+  }
+
+}
+
+
+function restartGame() {
+
+  currentScene = 1;
+
+  document.getElementById("finished").style.display = "none";
+  document.getElementById("game").style.display = "block";
+
+  document
+    .getElementById("scene1")
+    .classList.add("active");
+
+}
+
+</script>
+
+
+</body>
+</html>
