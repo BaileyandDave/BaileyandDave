@@ -65,7 +65,12 @@ main {
 }
 
 /* SCENES */
-
+.beach-scene {
+  background-image: url("wheres-bailey-beach.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .scene {
   position: absolute;
   inset: 0;
@@ -241,12 +246,11 @@ main {
 
   <!-- SCENE 1 -->
 
-  <div class="scene living-room active" id="scene1">
+  <div class="scene beach-scene active" id="scene1">
 
     <h2>🏠 Bailey's House</h2>
 
-    <div class="big-icon icon1">🛋️</div>
-    <div class="big-icon icon3">🪴</div>
+    
 
     <button class="bailey" id="bailey1"
       onclick="foundBailey()">🐕</button>
