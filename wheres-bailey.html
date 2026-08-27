@@ -244,10 +244,32 @@ main {
 
   <!-- SCENE 1 -->
 
-  <div class="scene active" id="scene1" style="background:url('https://www.baileyanddave.co.uk/wheres-bailey-beach.jpg') center center / cover no-repeat;">
+  <!-- SCENE 1 -->
 
-  <button class="bailey" id="bailey1"
-          onclick="foundBailey()"></button>
+<div class="scene active" id="scene1">
+
+  <img
+    src="https://www.baileyanddave.co.uk/wheres-bailey-beach.jpg"
+    alt="Bailey and Dave at the beach"
+    style="
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    ">
+
+  <button
+    class="bailey"
+    id="bailey1"
+    onclick="foundBailey()"
+    style="
+      position:absolute;
+      z-index:2;
+      background:transparent;
+      border:none;
+    ">
+  </button>
 
 </div>
 
