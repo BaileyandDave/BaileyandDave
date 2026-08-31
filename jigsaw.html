@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bailey & Dave Beach Jigsaw</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff9ef;
+    color: #243746;
+    text-align: center;
+}
+
+.top-buttons {
+    padding: 20px 10px;
+}
+
+.top-buttons a {
+    display: inline-block;
+    margin: 5px;
+    padding: 12px 18px;
+    background: white;
+    color: #243746;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+header {
+    padding: 25px 15px;
+    background: linear-gradient(135deg, #f7e8ff, #fff1b8);
+}
+
+h1 {
+    margin: 0 0 12px;
+    font-size: 36px;
+}
+
+header p {
+    font-size: 20px;
+}
+
+.instructions {
+    font-size: 19px;
+    padding: 25px 15px 10px;
+}
+
+#puzzle {
+    width: min(92vw, 520px);
+    aspect-ratio: 1 / 1;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 4px;
+    background: white;
+    padding: 5px;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.15);
+}
+
+.piece {
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background-image: url('beach-jigsaw-picture.png');
+    background-size: 300% 200%;
+    border-radius: 7px;
+}
+
+.piece.selected {
+    outline: 5px solid #ffcc33;
+    outline-offset: -5px;
+}
+
+#message {
+    min-height: 50px;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 10px 15px 30px;
+}
+
+#play-again {
+    display: none;
+    margin: 0 auto 40px;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 30px;
+    background: #243746;
+    color: white;
+    font-size: 19px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-buttons">
+    <a href="index.html">🏠 Quit Game</a>
+    <a href="activities.html">🧩 Back to Activities</a>
+</div>
+
+<header>
+    <h1>🧩 Beach Jigsaw</h1>
+    <p>Can you put Bailey & Dave's beach picture back together?</p>
+</header>
+
+<div class="instructions">
+    Tap one piece, then another, to swap them.
+</div>
+
+<div id="puzzle"></div>
+
+<div id="message"></div>
+
+<button id="play-again" onclick="startGame()">Play Again</button>
+
+<script>
+const rows = 2;
+const cols = 3;
+const totalPieces = rows * cols;
+
+let pieces = [];
+let firstSelected = null;
+
+function startGame() {
+    const puzzle = document.getElementById("puzzle");
+    puzzle.innerHTML = "";
+
+    document.getElementById("message").textContent = "";
+    document.getElementById("play-again").style.display = "none";
+
+    pieces = Array.from({length: totalPieces}, (_, i) => i);
+
+    do {
+        pieces.sort(() => Math.random() - 0.5);
+    } while (pieces.every((value, index) => value === index));
+
+    firstSelected = null;
+    drawPuzzle();
+}
+
+function drawPuzzle() {
+    const puzzle = document.getElementById("puzzle");
+    puzzle.innerHTML = "";
+
+    pieces.forEach((pieceNumber, position) => {
+        const piece = document.createElement("button");
+        piece.className = "piece";
+        piece.dataset.position = position;
+
+        const row = Math.floor(pieceNumber / cols);
+        const col = pieceNumber % cols;
+
+        piece.style.backgroundPosition =
+            `${col * 50}% ${row * 100}%`;
+
+        piece.addEventListener("click", () => selectPiece(position));
+
+        puzzle.appendChild(piece);
+    });
+}
+
+function selectPiece(position) {
+    const cards = document.querySelectorAll(".piece");
+
+    if (firstSelected === null) {
+        firstSelected = position;
+        cards[position].classList.add("selected");
+        return;
+    }
+
+    if (firstSelected === position) {
+        cards[position].classList.remove("selected");
+        firstSelected = null;
+        return;
+    }
+
+    [pieces[firstSelected], pieces[position]] =
+        [pieces[position], pieces[firstSelected]];
+
+    firstSelected = null;
+    drawPuzzle();
+    checkWin();
+}
+
+function checkWin() {
+    const solved = pieces.every((value, index) => value === index);
+
+    if (solved) {
+        document.getElementById("message").textContent =
+            "🎉 Well done! You completed the jigsaw!";
+        document.getElementById("play-again").style.display = "block";
+    }
+}
+
+startGame();
+</script>
+
+</body>
+</html>
