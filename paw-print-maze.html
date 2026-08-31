@@ -81,19 +81,41 @@ header p {
 
 .controls {
     width: 210px;
+    height: 180px;
     margin: 10px auto 20px;
+    position: relative;
 }
 
 .controls button {
     width: 64px;
     height: 56px;
-    margin: 3px;
     border: none;
     border-radius: 15px;
     background: #243746;
     color: white;
     font-size: 28px;
     cursor: pointer;
+    position: absolute;
+}
+
+.up {
+    top: 0;
+    left: 73px;
+}
+
+.left {
+    top: 62px;
+    left: 0;
+}
+
+.right {
+    top: 62px;
+    right: 0;
+}
+
+.down {
+    bottom: 0;
+    left: 73px;
 }
 
 #message {
@@ -120,15 +142,10 @@ header p {
 <div id="maze"></div>
 
 <div class="controls">
-    <div>
-        <button onclick="move(-1,0)">⬆️</button>
-    </div>
-
-    <div>
-        <button onclick="move(0,-1)">⬅️</button>
-        <button onclick="move(1,0)">⬇️</button>
-        <button onclick="move(0,1)">➡️</button>
-    </div>
+    <button class="up" onclick="move(-1,0)">⬆️</button>
+    <button class="left" onclick="move(0,-1)">⬅️</button>
+    <button class="right" onclick="move(0,1)">➡️</button>
+    <button class="down" onclick="move(1,0)">⬇️</button>
 </div>
 
 <div id="message">
