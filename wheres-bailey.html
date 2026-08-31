@@ -293,17 +293,29 @@ main {
 
   <!-- SCENE 2 -->
 
-  <div class="scene park" id="scene2">
+  <div class="scene" id="scene2">
 
-    <h2>🌳 The Park</h2>
+  <img src="/wheres-bailey-park(1).jpg"
+       alt="Bailey and Dave at the park"
+       style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
 
-    <div class="big-icon icon1">🌳</div>
-    <div class="big-icon icon2">🛝</div>
+  <button
+    class="bailey"
+    id="bailey2"
+    onclick="foundBailey()"
+    style="
+      position:absolute;
+      left:7%;
+      top:55%;
+      width:27%;
+      height:35%;
+      z-index:2;
+      background:transparent;
+      border:none;
+    ">
+  </button>
 
-    <button class="bailey" id="bailey2"
-      onclick="foundBailey()">🐕</button>
-
-  </div>
+</div>
 
 
   <!-- SCENE 3 -->
