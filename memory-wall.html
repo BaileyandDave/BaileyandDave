@@ -44,6 +44,7 @@ h1 {
 .memory-wall {
     width: min(96vw, 1200px);
     margin: 0 auto 30px;
+    position: relative;
 }
 
 .memory-wall img {
@@ -53,6 +54,14 @@ h1 {
     border-radius: 12px;
     box-shadow: 0 5px 18px rgba(0,0,0,0.15);
 }
+    .crab-hotspot {
+    position: absolute;
+    left: 64.7%;
+    top: 13.5%;
+    width: 11.8%;
+    height: 22%;
+    z-index: 5;
+    }
 </style>
 </head>
 
@@ -69,7 +78,14 @@ h1 {
 </p>
 
 <div class="memory-wall">
+
     <img src="memory-wall-master.jpg" alt="Bailey and Dave's Memory Wall">
+
+    <a href="jigsaw.html"
+       class="crab-hotspot"
+       aria-label="Play the Beach Jigsaw">
+    </a>
+
 </div>
 
 </body>
