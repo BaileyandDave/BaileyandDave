@@ -213,7 +213,7 @@ function checkWin() {
 function showPicture() {
     const puzzle = document.getElementById("puzzle");
 
-    const originalContent = puzzle.innerHTML;
+    puzzle.style.display = "block";
 
     puzzle.innerHTML = `
         <img src="beach-jigsaw-picture.png"
@@ -221,10 +221,11 @@ function showPicture() {
     `;
 
     setTimeout(() => {
-        puzzle.innerHTML = originalContent;
+        puzzle.style.display = "grid";
         drawPuzzle();
     }, 3000);
 }
+
 startGame();
 </script>
 
