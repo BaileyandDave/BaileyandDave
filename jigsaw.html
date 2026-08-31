@@ -210,7 +210,21 @@ function checkWin() {
         document.getElementById("play-again").style.display = "block";
     }
 }
+function showPicture() {
+    const puzzle = document.getElementById("puzzle");
 
+    const originalContent = puzzle.innerHTML;
+
+    puzzle.innerHTML = `
+        <img src="beach-jigsaw-picture.png"
+             style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+    `;
+
+    setTimeout(() => {
+        puzzle.innerHTML = originalContent;
+        drawPuzzle();
+    }, 3000);
+}
 startGame();
 </script>
 
