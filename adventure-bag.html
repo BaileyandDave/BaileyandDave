@@ -177,14 +177,103 @@ header p {
 </button>
 
 <script>
+
+const adventures = [
+    {
+        destination: "BEACH",
+        emoji: "🏖️",
+        items: [
+            ["🪣", "Bucket & Spade", true],
+            ["🧣", "Winter Scarf", false],
+            ["🛟", "Rubber Ring", true],
+            ["🧤", "Winter Gloves", false],
+            ["🧴", "Sun Cream", true],
+            ["🎄", "Christmas Tree", false]
+        ]
+    },
+    {
+        destination: "PARK",
+        emoji: "🌳",
+        items: [
+            ["⚽", "Ball", true],
+            ["🧺", "Picnic", true],
+            ["🦮", "Dog Lead", true],
+            ["🤿", "Snorkel", false],
+            ["🎄", "Christmas Tree", false],
+            ["🩴", "Flippers", false]
+        ]
+    },
+    {
+        destination: "CHRISTMAS ADVENTURE",
+        emoji: "🎄",
+        items: [
+            ["🎅", "Santa Hat", true],
+            ["🎁", "Present", true],
+            ["🧦", "Christmas Stocking", true],
+            ["🪣", "Bucket & Spade", false],
+            ["🛟", "Rubber Ring", false],
+            ["🕶️", "Sunglasses", false]
+        ]
+    },
+    {
+        destination: "ZOO",
+        emoji: "🦁",
+        items: [
+            ["🔭", "Binoculars", true],
+            ["📷", "Camera", true],
+            ["💧", "Water Bottle", true],
+            ["🎄", "Christmas Tree", false],
+            ["🛟", "Rubber Ring", false],
+            ["🪣", "Bucket & Spade", false]
+        ]
+    }
+];
+
+let currentAdventure = 0;
 let packed = 0;
 
-function chooseItem(button, correct) {
+function loadAdventure() {
+    const adventure = adventures[currentAdventure];
 
+    packed = 0;
+
+    document.querySelector("header p").textContent =
+        "Bailey and Dave are going on a " +
+        adventure.destination + " adventure! " +
+        adventure.emoji;
+
+    const itemsBox = document.querySelector(".items");
+    itemsBox.innerHTML = "";
+
+    adventure.items.forEach(item => {
+        const button = document.createElement("button");
+        button.className = "item";
+
+        button.innerHTML =
+            item[0] + "<span>" + item[1] + "</span>";
+
+        button.onclick = function() {
+            chooseItem(button, item[2]);
+        };
+
+        itemsBox.appendChild(button);
+    });
+
+    document.getElementById("bag-count").textContent =
+        "0 of 3 packed";
+
+    document.getElementById("message").textContent =
+        "Tap something to pack it!";
+
+    const nextButton = document.getElementById("play-again");
+    nextButton.style.display = "none";
+    nextButton.textContent = "Next Adventure";
+}
+
+function chooseItem(button, correct) {
     const message = document.getElementById("message");
 
     if (correct) {
-
         button.classList.add("packed");
         packed++;
 
@@ -192,26 +281,43 @@ function chooseItem(button, correct) {
             packed + " of 3 packed";
 
         if (packed === 3) {
-
             message.textContent =
-                "🎉 All packed! Bailey and Dave are ready for the beach!";
+                "🎉 All packed! Great job!";
 
-            document.getElementById("play-again").style.display = "block";
+            const nextButton =
+                document.getElementById("play-again");
+
+            nextButton.style.display = "block";
+
+            if (currentAdventure === adventures.length - 1) {
+                nextButton.textContent = "Play Again";
+            }
 
         } else {
-
-            message.textContent = "🐾 Great choice! Into the bag it goes!";
-
+            message.textContent =
+                "🐾 Great choice! Into the bag it goes!";
         }
 
     } else {
-
         message.textContent =
-            "😂 We don't think they'll need that at the beach! Try again.";
-
+            "😂 We don't think they'll need that! Try again.";
     }
 }
+
+document.getElementById("play-again").onclick = function() {
+
+    if (currentAdventure === adventures.length - 1) {
+        currentAdventure = 0;
+    } else {
+        currentAdventure++;
+    }
+
+    loadAdventure();
+};
+
+loadAdventure();
 </script>
+
 
 </body>
 </html>
