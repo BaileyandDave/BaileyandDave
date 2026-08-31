@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bailey & Dave Adventure Bag</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff9ef;
+    color: #243746;
+    text-align: center;
+}
+
+.top-buttons {
+    padding: 20px 10px;
+}
+
+.top-buttons a {
+    display: inline-block;
+    margin: 5px;
+    padding: 12px 18px;
+    background: white;
+    color: #243746;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+header {
+    padding: 25px 15px;
+    background: linear-gradient(135deg, #f7e8ff, #fff1b8);
+}
+
+h1 {
+    margin: 0 0 12px;
+    font-size: 36px;
+}
+
+header p {
+    font-size: 20px;
+}
+
+.instructions {
+    font-size: 20px;
+    padding: 25px 15px 10px;
+}
+
+.items {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.item {
+    min-height: 120px;
+    border: none;
+    border-radius: 20px;
+    background: white;
+    font-size: 45px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    cursor: pointer;
+}
+
+.item span {
+    display: block;
+    margin-top: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #243746;
+}
+
+.item.packed {
+    opacity: 0.3;
+    transform: scale(0.9);
+    pointer-events: none;
+}
+
+.bag {
+    margin: 25px auto 10px;
+    font-size: 80px;
+}
+
+#bag-count {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#message {
+    min-height: 60px;
+    padding: 15px;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+#play-again {
+    display: none;
+    margin: 10px auto 40px;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 30px;
+    background: #243746;
+    color: white;
+    font-size: 19px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-buttons">
+    <a href="index.html">🏠 Quit Game</a>
+    <a href="activities.html">🧩 Back to Activities</a>
+</div>
+
+<header>
+    <h1>🎒 Adventure Bag</h1>
+    <p>Bailey and Dave are going to the BEACH! 🏖️</p>
+</header>
+
+<div class="instructions">
+    Can you choose the <strong>3 things</strong> they should pack?
+</div>
+
+<div class="items">
+
+    <button class="item" onclick="chooseItem(this, true)">
+        🪣
+        <span>Bucket & Spade</span>
+    </button>
+
+    <button class="item" onclick="chooseItem(this, false)">
+        🧣
+        <span>Winter Scarf</span>
+    </button>
+
+    <button class="item" onclick="chooseItem(this, true)">
+        🛟
+        <span>Rubber Ring</span>
+    </button>
+
+    <button class="item" onclick="chooseItem(this, false)">
+        🧤
+        <span>Winter Gloves</span>
+    </button>
+
+    <button class="item" onclick="chooseItem(this, true)">
+        🧴
+        <span>Sun Cream</span>
+    </button>
+
+    <button class="item" onclick="chooseItem(this, false)">
+        🎄
+        <span>Christmas Tree</span>
+    </button>
+
+</div>
+
+<div class="bag">🎒</div>
+
+<div id="bag-count">0 of 3 packed</div>
+
+<div id="message">
+    Tap something to pack it!
+</div>
+
+<button id="play-again" onclick="location.reload()">
+    Play Again
+</button>
+
+<script>
+let packed = 0;
+
+function chooseItem(button, correct) {
+
+    const message = document.getElementById("message");
+
+    if (correct) {
+
+        button.classList.add("packed");
+        packed++;
+
+        document.getElementById("bag-count").textContent =
+            packed + " of 3 packed";
+
+        if (packed === 3) {
+
+            message.textContent =
+                "🎉 All packed! Bailey and Dave are ready for the beach!";
+
+            document.getElementById("play-again").style.display = "block";
+
+        } else {
+
+            message.textContent = "🐾 Great choice! Into the bag it goes!";
+
+        }
+
+    } else {
+
+        message.textContent =
+            "😂 We don't think they'll need that at the beach! Try again.";
+
+    }
+}
+</script>
+
+</body>
+</html>
