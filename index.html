@@ -99,12 +99,48 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
   .book{padding:14px}
   .book-cover{max-height:520px}
 }
+  
+.menu-toggle{
+display:none;
+font-size:28px;
+background:none;
+border:none;
+cursor:pointer;
+color:#243746;
+position:absolute;
+right:20px;
+top:20px;
+}
+@media(max-width:800px){
+
+.menu-toggle{
+display:block;
+}
+
+.navlinks.show{
+display:block;
+position:absolute;
+right:20px;
+top:70px;
+background:white;
+padding:20px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+.navlinks.show a{
+display:block;
+padding:10px;
+}
+
+}
 </style>
 </head>
 <body>
 <header><div class="wrap"><nav>
   <div class="brand">BAILEY &amp; DAVE</div>
-  <div class="navlinks">
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <div class="navlinks" id="mobileMenu">
     <a href="#meet">Meet the dogs</a><a href="#books">Books</a><a href="#help">Join in</a><a href="#coming">Coming soon</a>
     <a href="parents.html">Parents</a>
   </div>
@@ -278,4 +314,9 @@ if (savedConsent === 'granted') {
   document.getElementById('cookie-banner').style.display = 'none';
 }
 </script>
+  <script>
+function toggleMenu(){
+document.getElementById("mobileMenu").classList.toggle("show");
+}
+  </script>
 </body></html>
