@@ -66,6 +66,11 @@ header p {
     font-size: 29px;
     border-radius: 5px;
 }
+    #maze img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    }
 
 .wall {
     background: #9fcf8f;
@@ -187,12 +192,12 @@ function drawMaze() {
 
             if (row === finishRow && col === finishCol) {
                 cell.classList.add("finish");
-                cell.textContent = "🐾";
+                cell.innerHTML = '<img src="images/dave-maze-character.png" alt="Dave">';
             }
 
             if (row === playerRow && col === playerCol) {
                 cell.classList.add("player");
-                cell.textContent = "🐶";
+                cell.innerHTML = '<img src="images/bailey-maze-character.png" alt="Bailey">';
             }
 
             mazeBox.appendChild(cell);
