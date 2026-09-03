@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bailey & Dave Paw Print Maze</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff9ef;
+    color: #243746;
+    text-align: center;
+}
+
+.top-buttons {
+    padding: 18px 10px;
+}
+
+.top-buttons a {
+    display: inline-block;
+    margin: 5px;
+    padding: 11px 17px;
+    background: white;
+    color: #243746;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+header {
+    padding: 22px 15px;
+    background: linear-gradient(135deg, #dff5ff, #fff1b8);
+}
+
+h1 {
+    margin: 0 0 10px;
+    font-size: 34px;
+}
+
+header p {
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+#maze {
+    width: min(90vw, 430px);
+    margin: 25px auto;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+    background: #243746;
+    padding: 5px;
+    border-radius: 14px;
+}
+
+.cell {
+    aspect-ratio: 1 / 1;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 29px;
+    border-radius: 5px;
+}
+    #maze img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    }
+
+.wall {
+    background: #9fcf8f;
+}
+
+.player {
+    background: #fff2a8;
+}
+
+.finish {
+    background: #d8efff;
+}
+
+.controls {
+    width: 210px;
+    height: 180px;
+    margin: 10px auto 20px;
+    position: relative;
+}
+
+.controls button {
+    width: 64px;
+    height: 56px;
+    border: none;
+    border-radius: 15px;
+    background: #243746;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    position: absolute;
+}
+
+.up {
+    top: 0;
+    left: 73px;
+}
+
+.left {
+    top: 62px;
+    left: 0;
+}
+
+.right {
+    top: 62px;
+    right: 0;
+}
+
+.down {
+    bottom: 0;
+    left: 73px;
+}
+
+#message {
+    min-height: 50px;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 10px 15px 30px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-buttons">
+    <a href="index.html">🏠 Quit Game</a>
+    <a href="activities.html">🧩 Back to Activities</a>
+</div>
+
+<header>
+    <h1>🐾 Follow the Paw Prints</h1>
+    <p>Help Bailey find Dave!</p>
+</header>
+
+<div id="maze"></div>
+
+<div class="controls">
+    <button class="up" onclick="move(-1,0)">⬆️</button>
+    <button class="left" onclick="move(0,-1)">⬅️</button>
+    <button class="right" onclick="move(0,1)">➡️</button>
+    <button class="down" onclick="move(1,0)">⬇️</button>
+</div>
+
+<div id="message">
+    Use the arrows to guide Bailey through the maze.
+</div>
+
+<script>
+
+const maze = [
+    [0,0,1,0,0,0],
+    [1,0,1,0,1,0],
+    [0,0,0,0,1,0],
+    [0,1,1,0,1,0],
+    [0,0,0,0,0,0],
+    [1,1,0,1,1,0]
+];
+
+let playerRow = 0;
+let playerCol = 0;
+
+const finishRow = 5;
+const finishCol = 5;
+
+function drawMaze() {
+    const mazeBox = document.getElementById("maze");
+    mazeBox.innerHTML = "";
+
+    for (let row = 0; row < maze.length; row++) {
+
+        for (let col = 0; col < maze[row].length; col++) {
+
+            const cell = document.createElement("div");
+            cell.className = "cell";
+
+            if (maze[row][col] === 1) {
+                cell.classList.add("wall");
+                cell.textContent = "🌳";
+            }
+
+            if (row === finishRow && col === finishCol) {
+                cell.classList.add("finish");
+                cell.innerHTML = '<img src="images/dave-maze-character.png" alt="Dave">';
+            }
+
+            if (row === playerRow && col === playerCol) {
+                cell.classList.add("player");
+                cell.innerHTML = '<img src="images/bailey-maze-character.png" alt="Bailey">';
+            }
+
+            mazeBox.appendChild(cell);
+        }
+    }
+}
+
+function move(rowChange, colChange) {
+
+    const newRow = playerRow + rowChange;
+    const newCol = playerCol + colChange;
+
+    if (
+        newRow < 0 ||
+        newRow >= maze.length ||
+        newCol < 0 ||
+        newCol >= maze[0].length
+    ) {
+        document.getElementById("message").textContent =
+            "🐾 Bailey can't go that way!";
+        return;
+    }
+
+    if (maze[newRow][newCol] === 1) {
+        document.getElementById("message").textContent =
+            "🌳 Oops! There's something in the way.";
+        return;
+    }
+
+    playerRow = newRow;
+    playerCol = newCol;
+
+    drawMaze();
+
+    if (playerRow === finishRow && playerCol === finishCol) {
+        document.getElementById("message").textContent =
+            "🎉 You found Dave! Well done!";
+    } else {
+        document.getElementById("message").textContent =
+            "🐾 Keep going!";
+    }
+}
+
+drawMaze();
+
+</script>
+
+</body>
+</html>
