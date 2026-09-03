@@ -160,19 +160,21 @@ header p {
 <script>
 
 const maze = [
-    [0,0,1,0,0,0],
-    [1,0,1,0,1,0],
-    [0,0,0,0,1,0],
-    [0,1,1,0,1,0],
-    [0,0,0,0,0,0],
-    [1,1,0,1,1,0]
+    [0,0,1,0,0,0,1,0],
+[1,0,1,0,1,0,1,0],
+[0,0,0,0,1,0,0,0],
+[0,1,1,0,1,1,1,0],
+[0,0,0,0,0,0,1,0],
+[1,1,1,1,1,0,1,0],
+[0,0,0,0,1,0,0,0],
+[1,1,1,0,1,1,1,0]
 ];
 
 let playerRow = 0;
 let playerCol = 0;
 
-const finishRow = 5;
-const finishCol = 5;
+const finishRow = 7;
+const finishCol = 7;
 
 function drawMaze() {
     const mazeBox = document.getElementById("maze");
