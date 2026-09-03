@@ -85,8 +85,9 @@ header p {
 }
 
 .controls {
-    width: 260px;
-    margin: 10px auto 10px;
+    width: 280px;
+    height: auto;
+    margin: 10px auto 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -129,10 +130,10 @@ header p {
 <div id="maze"></div>
 
 <div class="controls">
-    <button class="up" onclick="move(-1,0)">⬆️</button>
     <button class="left" onclick="move(0,-1)">⬅️</button>
-    <button class="right" onclick="move(0,1)">➡️</button>
-    <button class="down" onclick="move(1,0)">⬇️</button>
+<button class="up" onclick="move(-1,0)">⬆️</button>
+<button class="down" onclick="move(1,0)">⬇️</button>
+<button class="right" onclick="move(0,1)">➡️</button>
 </div>
 
 <div id="message">
