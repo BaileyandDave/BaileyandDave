@@ -55,10 +55,23 @@ button:hover {
     min-height: 40px;
 }
 
-.score {
+    .score {
     font-size: 20px;
     margin-top: 15px;
 }
+
+.dog-box {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.dog-image {
+    width: 150px;
+    height: auto;
+}
+
 </style>
 
 </head>
@@ -111,11 +124,26 @@ function newQuestion(){
     answer = bailey + dave;
 
     document.getElementById("dogs").innerHTML =
-    "🐶 Bailey found:<br>" +
-    "🍪".repeat(bailey) +
-    "<br><br>" +
-    "🐾 Dave found:<br>" +
-    "🍪".repeat(dave);
+
+"<div class='dog-box'>" +
+
+"<div>" +
+"<h3>🐶 Bailey found:</h3>" +
+"<img src='../images/bailey-counter.png' class='dog-image'>" +
+"<p>" +
+"🍪".repeat(bailey) +
+"</p>" +
+"</div>" +
+
+"<div>" +
+"<h3>🐾 Dave found:</h3>" +
+"<img src='../images/dave-counter.png' class='dog-image'>" +
+"<p>" +
+"🍪".repeat(dave) +
+"</p>" +
+"</div>" +
+
+"</div>";
 
     document.getElementById("question").innerHTML =
     bailey + " + " + dave + " = ?";
