@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -217,8 +217,8 @@ function setLevel(max, name) {
 /* CREATE A NEW QUESTION */
 function newQuestion(){
 
-    let bailey = Math.floor(Math.random() * maxTreats) + 1;
-    let dave = Math.floor(Math.random() * maxTreats) + 1;
+    let bailey = Math.floor(Math.random() * (maxTreats - 1)) + 1;
+let dave = Math.floor(Math.random() * (maxTreats - bailey)) + 1;
 
     answer = bailey + dave;
 
