@@ -214,8 +214,9 @@ function setLevel(max, name) {
 /* CREATE A NEW QUESTION */
 function newQuestion(){
 
-    let bailey = Math.floor(Math.random() * (maxTreats - 1)) + 1;
-let dave = Math.floor(Math.random() * (maxTreats - bailey)) + 1;
+    let total = Math.floor(Math.random() * (maxTreats - 1)) + 2;
+let bailey = Math.floor(Math.random() * (total - 1)) + 1;
+let dave = total - bailey;
 
     answer = bailey + dave;
 
