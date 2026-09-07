@@ -103,13 +103,33 @@ button:hover {
 .dog-box {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+}
+
+.dog-box > div {
+    width: 48%;
+    min-width: 0;
+    text-align: center;
+}
+
+.dog-box h3 {
+    font-size: 1.05rem;
+    margin: 10px 0;
 }
 
 .dog-image {
-    width: 150px;
+    width: 100%;
+    max-width: 150px;
     height: auto;
+}
+
+.dog-box p {
+    font-size: 1.25rem;
+    line-height: 1.4;
+    margin: 8px 0 15px;
+    overflow-wrap: anywhere;
 }
 
 </style>
