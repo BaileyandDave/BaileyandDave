@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bailey & Dave Spot the Pattern</title>
+
+<style>
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff8ed;
+    color: #1f3557;
+    text-align: center;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 25px 12px;
+    flex-wrap: nowrap;
+}
+
+.nav-button {
+    background: white;
+    color: #1f3557;
+    border: none;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+    font-weight: bold;
+    padding: 14px 18px;
+    font-size: 18px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.hero {
+    background: linear-gradient(
+        135deg,
+        #f3e8ff 0%,
+        #fff1dc 50%,
+        #fff3b8 100%
+    );
+    padding: 30px 15px 25px;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: 2.2rem;
+}
+
+.hero p {
+    margin: 12px 0 0;
+    font-size: 1.05rem;
+}
+
+.game-box {
+    max-width: 650px;
+    margin: 25px auto;
+    padding: 0 15px 40px;
+}
+
+.status {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 18px 0;
+    font-weight: bold;
+}
+
+.pattern-box {
+    background: white;
+    max-width: 560px;
+    margin: 20px auto;
+    padding: 24px 14px;
+    border-radius: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+}
+
+.pattern {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 2.4rem;
+    line-height: 1.3;
+}
+
+.question-mark {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: #fff3b8;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.answer-title {
+    margin-top: 22px;
+    font-size: 1.15rem;
+    font-weight: bold;
+}
+
+.answers {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 15px 0;
+}
+
+.answer-button {
+    width: 90px;
+    height: 75px;
+    border: none;
+    border-radius: 18px;
+    background: white;
+    font-size: 2.2rem;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.10);
+}
+
+.answer-button:hover {
+    transform: translateY(-2px);
+}
+
+.message {
+    min-height: 40px;
+    margin: 15px 0;
+    font-size: 1.15rem;
+    font-weight: bold;
+}
+
+.game-button {
+    border: none;
+    border-radius: 18px;
+    background: #1f3557;
+    color: white;
+    padding: 14px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+
+    .top-nav .nav-button {
+        padding: 12px 14px;
+        font-size: 16px;
+    }
+
+    .hero {
+        padding: 24px 12px 20px;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .game-box {
+        margin-top: 18px;
+    }
+
+    .pattern-box {
+        padding: 20px 10px;
+    }
+
+    .pattern {
+        gap: 7px;
+        font-size: 2rem;
+    }
+
+    .question-mark {
+        width: 46px;
+        height: 46px;
+        font-size: 1.7rem;
+    }
+
+    .answer-button {
+        width: 82px;
+        height: 68px;
+        font-size: 2rem;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="top-nav">
+
+<button class="nav-button"
+onclick="window.location.href='index.html'">
+🏠 Quit Game
+</button>
+
+<button class="nav-button"
+onclick="window.location.href='puzzles.html'">
+🧩 Back to Puzzles
+</button>
+
+</div>
+
+
+<section class="hero">
+
+<h1>🐾 Spot the Pattern</h1>
+
+<p>Work out what comes next!</p>
+
+</section>
+
+
+<div class="game-box">
+
+<div class="status">
+    <span>Round: <span id="round">1</span>/10</span>
+    <span>Score: <span id="score">0</span> ⭐</span>
+</div>
+
+
+<div class="pattern-box">
+
+<div id="pattern" class="pattern"></div>
+
+</div>
+
+
+<div class="answer-title">
+What comes next?
+</div>
+
+<div id="answers" class="answers"></div>
+
+<div id="message" class="message">
+🐶 Have a good look at the pattern!
+</div>
+
+<button class="game-button" onclick="restartGame()">
+🔄 Start Again
+</button>
+
+</div>
+
+
+<script>
+
+const SYMBOLS = [
+    "🐾",
+    "🍪",
+    "🦴",
+    "🐶",
+    "⭐",
+    "🎁",
+    "🎄",
+    "🏖️",
+    "🐟",
+    "🍎"
+];
+
+let round = 1;
+let score = 0;
+let correctAnswer = "";
+let acceptingAnswer = true;
+
+
+/* RANDOM SYMBOL */
+function randomSymbol(exclude = []) {
+
+    let choices =
+        SYMBOLS.filter(function(symbol) {
+            return !exclude.includes(symbol);
+        });
+
+    return choices[
+        Math.floor(Math.random() * choices.length)
+    ];
+}
+
+
+/* CREATE PATTERN */
+function makePattern() {
+
+    let pattern = [];
+    let answer = "";
+
+    if(round <= 3) {
+
+        /* EASY: A B A B A ? */
+
+        const a = randomSymbol();
+        const b = randomSymbol([a]);
+
+        pattern = [a, b, a, b, a];
+        answer = b;
+
+    }
+
+    else if(round <= 6) {
+
+        /* MEDIUM: A A B A A B ? */
+
+        const a = randomSymbol();
+        const b = randomSymbol([a]);
+
+        pattern = [a, a, b, a, a, b];
+        answer = a;
+
+    }
+
+    else if(round <= 8) {
+
+        /* HARD: A B B A B B A ? */
+
+        const a = randomSymbol();
+        const b = randomSymbol([a]);
+
+        pattern = [a, b, b, a, b, b, a];
+        answer = b;
+
+    }
+
+    else {
+
+        /* TRICKIER: A B C A B C A ? */
+
+        const a = randomSymbol();
+        const b = randomSymbol([a]);
+        const c = randomSymbol([a, b]);
+
+        pattern = [a, b, c, a, b, c, a];
+        answer = b;
+
+    }
+
+    return {
+        pattern: pattern,
+        answer: answer
+    };
+}
+
+
+/* NEW ROUND */
+function newRound() {
+
+    acceptingAnswer = true;
+
+    document.getElementById("round").innerText = round;
+
+    document.getElementById("score").innerText = score;
+
+    document.getElementById("message").innerText =
+        "🐶 Have a good look at the pattern!";
+
+
+    const puzzle = makePattern();
+
+    correctAnswer = puzzle.answer;
+
+
+    /* DRAW PATTERN */
+
+    const patternBox =
+        document.getElementById("pattern");
+
+    patternBox.innerHTML = "";
+
+    puzzle.pattern.forEach(function(symbol) {
+
+        const span =
+            document.createElement("span");
+
+        span.innerText = symbol;
+
+        patternBox.appendChild(span);
+
+    });
+
+
+    const question =
+        document.createElement("span");
+
+    question.className = "question-mark";
+    question.innerText = "?";
+
+    patternBox.appendChild(question);
+
+
+    /* MAKE ANSWERS */
+
+    let choices = [correctAnswer];
+
+    while(choices.length < 3) {
+
+        const option =
+            randomSymbol(choices);
+
+        choices.push(option);
+
+    }
+
+
+    /* SHUFFLE ANSWERS */
+
+    choices.sort(function() {
+        return Math.random() - 0.5;
+    });
+
+
+    const answerBox =
+        document.getElementById("answers");
+
+    answerBox.innerHTML = "";
+
+
+    choices.forEach(function(symbol) {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "answer-button";
+        button.innerText = symbol;
+
+        button.onclick = function() {
+            checkAnswer(symbol);
+        };
+
+        answerBox.appendChild(button);
+
+    });
+
+}
+
+
+/* CHECK ANSWER */
+function checkAnswer(symbol) {
+
+    if(!acceptingAnswer) {
+        return;
+    }
+
+
+    if(symbol === correctAnswer) {
+
+        acceptingAnswer = false;
+
+        score++;
+
+        document.getElementById("score").innerText = score;
+
+        document.getElementById("message").innerText =
+            "🎉 That's right!";
+
+
+        if(round >= 10) {
+
+            setTimeout(showChampion, 700);
+
+        }
+        else {
+
+            round++;
+
+            setTimeout(newRound, 800);
+
+        }
+
+    }
+    else {
+
+        document.getElementById("message").innerText =
+            "🐾 Not quite — look at the pattern again!";
+
+    }
+
+}
+
+
+/* CHAMPION */
+function showChampion() {
+
+    document.getElementById("pattern").innerHTML = "";
+
+    document.getElementById("answers").innerHTML = "";
+
+    document.getElementById("message").innerHTML =
+        "🏆 <strong>PATTERN CHAMPION!</strong><br>" +
+        "You solved all 10 Bailey & Dave patterns!<br><br>" +
+        "⭐ Final Score: " + score;
+
+}
+
+
+/* RESTART */
+function restartGame() {
+
+    round = 1;
+    score = 0;
+    acceptingAnswer = true;
+
+    newRound();
+
+}
+
+
+/* START GAME */
+newRound();
+
+</script>
+
+</body>
+
+</html>
