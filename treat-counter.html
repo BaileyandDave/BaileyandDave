@@ -279,14 +279,20 @@ function checkAnswer(number){
 
     if(number === answer){
 
-        score++;
+    score++;
 
-        document.getElementById("score").innerText = score;
+    document.getElementById("score").innerText = score;
 
-        document.getElementById("message").innerText =
-            "🎉 Well done! Bailey and Dave found the treats!";
+    document.getElementById("message").innerText =
+        "🎉 Well done! That's right!";
 
-    }
+    document.getElementById("answers").innerHTML = "";
+
+    setTimeout(function(){
+        newQuestion();
+    }, 1200);
+
+}
     else{
 
         document.getElementById("message").innerText =
