@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bailey & Dave Word Search</title>
+
+<style>
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff8ed;
+    color: #1f3557;
+    text-align: center;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 25px 12px;
+    flex-wrap: nowrap;
+}
+
+.nav-button {
+    background: white;
+    color: #1f3557;
+    border: none;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+    font-weight: bold;
+    padding: 14px 18px;
+    font-size: 18px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.hero {
+    background: linear-gradient(
+        135deg,
+        #f3e8ff 0%,
+        #fff1dc 50%,
+        #fff3b8 100%
+    );
+    padding: 30px 15px 25px;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: 2.2rem;
+}
+
+.hero p {
+    margin: 12px 0 0;
+    font-size: 1.05rem;
+}
+
+.game-box {
+    max-width: 650px;
+    margin: 25px auto;
+    padding: 0 15px 40px;
+}
+
+.word-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 18px 0;
+}
+
+.word {
+    background: white;
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.word.found {
+    text-decoration: line-through;
+    opacity: 0.45;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 4px;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.letter {
+    aspect-ratio: 1 / 1;
+    border: none;
+    border-radius: 8px;
+    background: white;
+    color: #1f3557;
+    font-size: 1.25rem;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.10);
+    cursor: pointer;
+}
+
+.letter.selected {
+    background: #fff3b8;
+}
+
+.letter.found {
+    background: #dff5df;
+}
+
+.message {
+    min-height: 35px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.game-button {
+    border: none;
+    border-radius: 18px;
+    background: #1f3557;
+    color: white;
+    padding: 14px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+
+    .top-nav .nav-button {
+        padding: 12px 14px;
+        font-size: 16px;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero {
+        padding: 24px 12px 20px;
+    }
+
+    .grid {
+        gap: 3px;
+    }
+
+    .letter {
+        font-size: 1rem;
+        border-radius: 6px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="top-nav">
+
+<button class="nav-button"
+onclick="window.location.href='index.html'">
+🏠 Quit Game
+</button>
+
+<button class="nav-button"
+onclick="window.location.href='puzzles.html'">
+🧩 Back to Puzzles
+</button>
+
+</div>
+
+
+<section class="hero">
+
+<h1>🔎 Bailey & Dave Word Search</h1>
+
+<p>Tap the first and last letter of each hidden word!</p>
+
+</section>
+
+
+<div class="game-box">
+
+<h2>Find these words</h2>
+
+<div id="wordList" class="word-list"></div>
+
+<div id="grid" class="grid"></div>
+
+<div id="message" class="message"></div>
+
+<button class="game-button" onclick="newGame()">
+🔄 New Word Search
+</button>
+
+</div>
+
+
+<script>
+
+const SIZE = 10;
+
+const WORDS = [
+    "BAILEY",
+    "DAVE",
+    "TREAT",
+    "PUG",
+    "SAUSAGE",
+    "BEACH",
+    "PARK",
+    "CRAB"
+];
+
+let grid = [];
+let placedWords = [];
+let firstCell = null;
+
+
+/* RANDOM LETTER */
+function randomLetter() {
+
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    return alphabet[
+        Math.floor(Math.random() * alphabet.length)
+    ];
+}
+
+
+/* CREATE EMPTY GRID */
+function createEmptyGrid() {
+
+    grid = [];
+
+    for(let row = 0; row < SIZE; row++) {
+
+        grid[row] = [];
+
+        for(let col = 0; col < SIZE; col++) {
+
+            grid[row][col] = "";
+
+        }
+    }
+}
+
+
+/* TRY TO PLACE A WORD */
+function placeWord(word) {
+
+    const directions = [
+
+        [0, 1],
+        [1, 0],
+        [1, 1],
+        [1, -1],
+
+        [0, -1],
+        [-1, 0],
+        [-1, -1],
+        [-1, 1]
+
+    ];
+
+    for(let attempt = 0; attempt < 200; attempt++) {
+
+        const direction =
+            directions[
+                Math.floor(Math.random() * directions.length)
+            ];
+
+        const dr = direction[0];
+        const dc = direction[1];
+
+        const row =
+            Math.floor(Math.random() * SIZE);
+
+        const col =
+            Math.floor(Math.random() * SIZE);
+
+        const endRow =
+            row + dr * (word.length - 1);
+
+        const endCol =
+            col + dc * (word.length - 1);
+
+
+        if(
+            endRow < 0 ||
+            endRow >= SIZE ||
+            endCol < 0 ||
+            endCol >= SIZE
+        ) {
+            continue;
+        }
+
+
+        let fits = true;
+
+        for(let i = 0; i < word.length; i++) {
+
+            const r = row + dr * i;
+            const c = col + dc * i;
+
+            if(
+                grid[r][c] !== "" &&
+                grid[r][c] !== word[i]
+            ) {
+
+                fits = false;
+                break;
+
+            }
+        }
+
+
+        if(!fits) {
+            continue;
+        }
+
+
+        const cells = [];
+
+        for(let i = 0; i < word.length; i++) {
+
+            const r = row + dr * i;
+            const c = col + dc * i;
+
+            grid[r][c] = word[i];
+
+            cells.push(r + "-" + c);
+
+        }
+
+
+        placedWords.push({
+
+            word: word,
+            cells: cells,
+            found: false
+
+        });
+
+        return true;
+    }
+
+    return false;
+}
+
+
+/* FILL EMPTY SPACES */
+function fillGrid() {
+
+    for(let row = 0; row < SIZE; row++) {
+
+        for(let col = 0; col < SIZE; col++) {
+
+            if(grid[row][col] === "") {
+
+                grid[row][col] = randomLetter();
+
+            }
+        }
+    }
+}
+
+
+/* DISPLAY WORD LIST */
+function drawWordList() {
+
+    const box =
+        document.getElementById("wordList");
+
+    box.innerHTML = "";
+
+    placedWords.forEach(function(item) {
+
+        const span =
+            document.createElement("span");
+
+        span.className = "word";
+
+        if(item.found) {
+            span.classList.add("found");
+        }
+
+        span.innerText = item.word;
+
+        box.appendChild(span);
+
+    });
+}
+
+
+/* DISPLAY GRID */
+function drawGrid() {
+
+    const box =
+        document.getElementById("grid");
+
+    box.innerHTML = "";
+
+
+    for(let row = 0; row < SIZE; row++) {
+
+        for(let col = 0; col < SIZE; col++) {
+
+            const button =
+                document.createElement("button");
+
+            button.className = "letter";
+
+            button.innerText =
+                grid[row][col];
+
+            button.dataset.row = row;
+            button.dataset.col = col;
+
+            button.onclick = function() {
+
+                chooseCell(
+                    row,
+                    col,
+                    button
+                );
+
+            };
+
+
+            placedWords.forEach(function(item) {
+
+                if(
+                    item.found &&
+                    item.cells.includes(row + "-" + col)
+                ) {
+
+                    button.classList.add("found");
+
+                }
+
+            });
+
+
+            box.appendChild(button);
+
+        }
+    }
+}
+
+
+/* CHILD SELECTS A LETTER */
+function chooseCell(row, col, button) {
+
+    if(firstCell === null) {
+
+        firstCell = {
+            row: row,
+            col: col
+        };
+
+        button.classList.add("selected");
+
+        document.getElementById("message").innerText =
+            "Now tap the last letter!";
+
+        return;
+    }
+
+
+    const secondCell = {
+        row: row,
+        col: col
+    };
+
+
+    checkWord(
+        firstCell,
+        secondCell
+    );
+
+    firstCell = null;
+
+}
+
+
+/* CHECK SELECTED LINE */
+function checkWord(start, end) {
+
+    const dr =
+        Math.sign(end.row - start.row);
+
+    const dc =
+        Math.sign(end.col - start.col);
+
+
+    const rowDistance =
+        Math.abs(end.row - start.row);
+
+    const colDistance =
+        Math.abs(end.col - start.col);
+
+
+    if(
+        rowDistance !== 0 &&
+        colDistance !== 0 &&
+        rowDistance !== colDistance
+    ) {
+
+        wrongWord();
+        return;
+
+    }
+
+
+    const length =
+        Math.max(rowDistance, colDistance) + 1;
+
+    const cells = [];
+
+    let letters = "";
+
+
+    for(let i = 0; i < length; i++) {
+
+        const r =
+            start.row + dr * i;
+
+        const c =
+            start.col + dc * i;
+
+        cells.push(r + "-" + c);
+
+        letters += grid[r][c];
+
+    }
+
+
+    const backwards =
+        letters.split("").reverse().join("");
+
+
+    const match =
+        placedWords.find(function(item) {
+
+            return (
+                !item.found &&
+                (
+                    item.word === letters ||
+                    item.word === backwards
+                )
+            );
+
+        });
+
+
+    if(match) {
+
+        match.found = true;
+
+        document.getElementById("message").innerText =
+            "🎉 You found " + match.word + "!";
+
+        drawWordList();
+        drawGrid();
+
+        checkWinner();
+
+    }
+    else {
+
+        wrongWord();
+
+    }
+}
+
+
+/* WRONG GUESS */
+function wrongWord() {
+
+    document.getElementById("message").innerText =
+        "🐶 Not quite — try another word!";
+
+    drawGrid();
+}
+
+
+/* CHECK IF ALL WORDS FOUND */
+function checkWinner() {
+
+    const finished =
+        placedWords.every(function(item) {
+
+            return item.found;
+
+        });
+
+
+    if(finished) {
+
+        document.getElementById("message").innerHTML =
+            "🏆 <strong>WORD SEARCH CHAMPION!</strong><br>" +
+            "You found all Bailey & Dave's hidden words!";
+
+    }
+}
+
+
+/* NEW GAME */
+function newGame() {
+
+    firstCell = null;
+
+    placedWords = [];
+
+    createEmptyGrid();
+
+
+    WORDS.forEach(function(word) {
+
+        placeWord(word);
+
+    });
+
+
+    fillGrid();
+
+    drawWordList();
+
+    drawGrid();
+
+    document.getElementById("message").innerText =
+        "🐾 Find your first word!";
+
+}
+
+
+/* START */
+newGame();
+
+</script>
+
+</body>
+
+</html>
