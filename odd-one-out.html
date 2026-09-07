@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bailey & Dave Odd One Out</title>
+
+<style>
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff8ed;
+    color: #1f3557;
+    text-align: center;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 25px 12px;
+    flex-wrap: nowrap;
+}
+
+.nav-button {
+    background: white;
+    color: #1f3557;
+    border: none;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+    font-weight: bold;
+    padding: 14px 18px;
+    font-size: 18px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.hero {
+    background: linear-gradient(
+        135deg,
+        #f3e8ff 0%,
+        #fff1dc 50%,
+        #fff3b8 100%
+    );
+    padding: 30px 15px 25px;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: 2.2rem;
+}
+
+.hero p {
+    margin: 12px 0 0;
+    font-size: 1.05rem;
+}
+
+.game-box {
+    max-width: 650px;
+    margin: 25px auto;
+    padding: 0 15px 40px;
+}
+
+.status {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    font-weight: bold;
+    margin: 18px 0;
+}
+
+.odd-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 430px;
+    margin: 20px auto;
+}
+
+.odd-item {
+    aspect-ratio: 1 / 1;
+    border: none;
+    border-radius: 18px;
+    background: white;
+    font-size: 2.2rem;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.10);
+}
+
+.odd-item:hover {
+    transform: translateY(-2px);
+}
+
+.message {
+    min-height: 40px;
+    margin: 15px 0;
+    font-size: 1.15rem;
+    font-weight: bold;
+}
+
+.game-button {
+    border: none;
+    border-radius: 18px;
+    background: #1f3557;
+    color: white;
+    padding: 14px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+
+    .top-nav .nav-button {
+        padding: 12px 14px;
+        font-size: 16px;
+    }
+
+    .hero {
+        padding: 24px 12px 20px;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .game-box {
+        margin-top: 18px;
+    }
+
+    .odd-grid {
+        gap: 7px;
+    }
+
+    .odd-item {
+        font-size: 1.9rem;
+        border-radius: 14px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="top-nav">
+
+<button class="nav-button"
+onclick="window.location.href='index.html'">
+🏠 Quit Game
+</button>
+
+<button class="nav-button"
+onclick="window.location.href='puzzles.html'">
+🧩 Back to Puzzles
+</button>
+
+</div>
+
+
+<section class="hero">
+
+<h1>👀 Odd One Out</h1>
+
+<p>Can you spot the picture that doesn't belong?</p>
+
+</section>
+
+
+<div class="game-box">
+
+<div class="status">
+    <span>Round: <span id="round">1</span>/10</span>
+    <span>Score: <span id="score">0</span> ⭐</span>
+</div>
+
+<div id="oddGrid" class="odd-grid"></div>
+
+<div id="message" class="message">
+🐾 Find the odd one out!
+</div>
+
+<button class="game-button" onclick="restartGame()">
+🔄 Start Again
+</button>
+
+</div>
+
+
+<script>
+
+const PAIRS = [
+    ["🐾", "🍪"],
+    ["🐶", "🐕"],
+    ["🦴", "🍪"],
+    ["🎁", "🎄"],
+    ["🏖️", "🏝️"],
+    ["🐟", "🐠"],
+    ["⭐", "🌟"],
+    ["🌞", "🌝"],
+    ["🍎", "🍏"],
+    ["⚽", "🏀"]
+];
+
+let round = 1;
+let score = 0;
+let correctPosition = 0;
+let acceptingAnswer = true;
+
+
+/* CREATE ROUND */
+function newRound() {
+
+    acceptingAnswer = true;
+
+    document.getElementById("round").innerText = round;
+
+    document.getElementById("score").innerText = score;
+
+    document.getElementById("message").innerText =
+        "🐾 Find the odd one out!";
+
+
+    const pair =
+        PAIRS[Math.floor(Math.random() * PAIRS.length)];
+
+    const normal = pair[0];
+    const odd = pair[1];
+
+
+    /* MORE ITEMS AS THE GAME GETS HARDER */
+
+    let itemCount;
+
+    if(round <= 3) {
+        itemCount = 8;
+    }
+    else if(round <= 6) {
+        itemCount = 12;
+    }
+    else {
+        itemCount = 16;
+    }
+
+
+    correctPosition =
+        Math.floor(Math.random() * itemCount);
+
+
+    const grid =
+        document.getElementById("oddGrid");
+
+    grid.innerHTML = "";
+
+
+    for(let i = 0; i < itemCount; i++) {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "odd-item";
+
+        if(i === correctPosition) {
+            button.innerText = odd;
+        }
+        else {
+            button.innerText = normal;
+        }
+
+        button.onclick = function() {
+            checkAnswer(i);
+        };
+
+        grid.appendChild(button);
+    }
+}
+
+
+/* CHECK ANSWER */
+function checkAnswer(position) {
+
+    if(!acceptingAnswer) {
+        return;
+    }
+
+
+    if(position === correctPosition) {
+
+        acceptingAnswer = false;
+
+        score++;
+
+        document.getElementById("score").innerText = score;
+
+        document.getElementById("message").innerText =
+            "🎉 Well spotted!";
+
+
+        if(round >= 10) {
+
+            setTimeout(showChampion, 700);
+
+        }
+        else {
+
+            round++;
+
+            setTimeout(newRound, 800);
+
+        }
+
+    }
+    else {
+
+        document.getElementById("message").innerText =
+            "🐶 Not quite — have another look!";
+
+    }
+}
+
+
+/* CHAMPION SCREEN */
+function showChampion() {
+
+    document.getElementById("oddGrid").innerHTML = "";
+
+    document.getElementById("message").innerHTML =
+        "🏆 <strong>ODD ONE OUT CHAMPION!</strong><br>" +
+        "You spotted all 10 tricky pictures!<br><br>" +
+        "⭐ Final Score: " + score;
+
+}
+
+
+/* RESTART */
+function restartGame() {
+
+    round = 1;
+    score = 0;
+    acceptingAnswer = true;
+
+    newRound();
+}
+
+
+/* START */
+newRound();
+
+</script>
+
+</body>
+
+</html>
