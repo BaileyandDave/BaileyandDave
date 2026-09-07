@@ -5,8 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Bailey & Dave Treat Counter Challenge</title>
-
 <style>
+    .level-box {
+    margin: 20px 0 25px;
+    text-align: center;
+}
+
+.level-box h2 {
+    color: #1f3557;
+    margin-bottom: 15px;
+}
+
+.level-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.level-button {
+    min-width: 150px;
+    padding: 14px 18px;
+    border: none;
+    border-radius: 18px;
+    background: white;
+    color: #1f3557;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+}
+
+.level-button:hover {
+    transform: translateY(-2px);
+}
+
+.level-button span {
+    display: block;
+    font-size: 0.9rem;
+    margin-top: 4px;
+    font-weight: normal;
+}
+
 body {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -118,14 +158,21 @@ let answer = 0;
 let maxTreats = 5;
 
 /* CREATE THE LEVEL BUTTONS */
+
 const levelBox = document.createElement("div");
+
+levelBox.className = "level-box";
 
 levelBox.innerHTML =
     "<h2>Choose a Level</h2>" +
-    "<button onclick='setLevel(5, \"Bailey Beginner\")'>🐶 Bailey Beginner<br>1–5</button>" +
-    "<button onclick='setLevel(10, \"Dave's Challenge\")'>🐾 Dave's Challenge<br>1–10</button>" +
-    "<button onclick='setLevel(20, \"Super Sausage\")'>🌭 Super Sausage<br>1–20</button>";
-
+    "<div class='level-buttons'>" +
+    "<button class='level-button' onclick='setLevel(5, \"Bailey Beginner\")'>" +
+    "🐶 Bailey Beginner<span>1–5 treats</span></button>" +
+    "<button class='level-button' onclick='setLevel(10, \"Dave's Challenge\")'>" +
+    "🐾 Dave's Challenge<span>1–10 treats</span></button>" +
+    "<button class='level-button' onclick='setLevel(20, \"Super Sausage\")'>" +
+    "🌭 Super Sausage<span>1–20 treats</span></button>" +
+    "</div>";
 document.getElementById("dogs").parentNode.insertBefore(
     levelBox,
     document.getElementById("dogs")
