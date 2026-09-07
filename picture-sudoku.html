@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bailey & Dave Picture Sudoku</title>
+
+<style>
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff8ed;
+    color: #1f3557;
+    text-align: center;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 25px 12px;
+    flex-wrap: nowrap;
+}
+
+.nav-button {
+    background: white;
+    color: #1f3557;
+    border: none;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+    font-weight: bold;
+    padding: 14px 18px;
+    font-size: 18px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.hero {
+    background: linear-gradient(
+        135deg,
+        #f3e8ff 0%,
+        #fff1dc 50%,
+        #fff3b8 100%
+    );
+    padding: 30px 15px 25px;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: 2.2rem;
+}
+
+.hero p {
+    margin: 12px 0 0;
+    font-size: 1.05rem;
+}
+
+.game-box {
+    max-width: 600px;
+    margin: 22px auto;
+    padding: 0 15px 40px;
+}
+
+.instructions {
+    line-height: 1.5;
+    margin: 12px auto 18px;
+    max-width: 500px;
+}
+
+.sudoku-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: min(88vw, 400px);
+    margin: 20px auto;
+    border: 3px solid #1f3557;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #1f3557;
+    gap: 2px;
+}
+
+.cell {
+    aspect-ratio: 1 / 1;
+    border: none;
+    background: white;
+    font-size: 2.2rem;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* thicker 2x2 box lines */
+
+.cell:nth-child(2),
+.cell:nth-child(6),
+.cell:nth-child(10),
+.cell:nth-child(14) {
+    border-right: 3px solid #1f3557;
+}
+
+.cell:nth-child(n+5):nth-child(-n+8) {
+    border-bottom: 3px solid #1f3557;
+}
+
+.given {
+    background: #f3e8ff;
+    cursor: default;
+}
+
+.selected {
+    background: #fff3b8;
+}
+
+.completed {
+    background: #dff5df;
+}
+
+.choose-title {
+    font-weight: bold;
+    margin-top: 18px;
+}
+
+.symbol-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 12px 0;
+}
+
+.symbol-button {
+    width: 70px;
+    height: 65px;
+    border: none;
+    border-radius: 16px;
+    background: white;
+    font-size: 2rem;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.10);
+}
+
+.symbol-button:hover {
+    transform: translateY(-2px);
+}
+
+.message {
+    min-height: 42px;
+    margin: 15px 0;
+    font-size: 1.15rem;
+    font-weight: bold;
+}
+
+.game-button {
+    border: none;
+    border-radius: 18px;
+    background: #1f3557;
+    color: white;
+    padding: 14px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+
+    .top-nav .nav-button {
+        padding: 12px 14px;
+        font-size: 16px;
+    }
+
+    .hero {
+        padding: 24px 12px 20px;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .game-box {
+        margin-top: 15px;
+    }
+
+    .cell {
+        font-size: 1.9rem;
+    }
+
+    .symbol-button {
+        width: 62px;
+        height: 58px;
+        font-size: 1.8rem;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="top-nav">
+
+<button class="nav-button"
+onclick="window.location.href='index.html'">
+🏠 Quit Game
+</button>
+
+<button class="nav-button"
+onclick="window.location.href='puzzles.html'">
+🧩 Back to Puzzles
+</button>
+
+</div>
+
+
+<section class="hero">
+
+<h1>🧠 Picture Sudoku</h1>
+
+<p>Can you put every picture in the right place?</p>
+
+</section>
+
+
+<div class="game-box">
+
+<p class="instructions">
+Each row, column and little 2×2 box needs one of each picture:
+<strong>🐶 🐾 🍪 🦴</strong>
+</p>
+
+
+<div id="sudokuGrid" class="sudoku-grid"></div>
+
+
+<div class="choose-title">
+Tap an empty square, then choose a picture:
+</div>
+
+
+<div class="symbol-buttons">
+
+<button class="symbol-button"
+onclick="chooseSymbol('🐶')">🐶</button>
+
+<button class="symbol-button"
+onclick="chooseSymbol('🐾')">🐾</button>
+
+<button class="symbol-button"
+onclick="chooseSymbol('🍪')">🍪</button>
+
+<button class="symbol-button"
+onclick="chooseSymbol('🦴')">🦴</button>
+
+</div>
+
+
+<div id="message" class="message">
+🐾 Choose an empty square!
+</div>
+
+
+<button class="game-button" onclick="newPuzzle()">
+🔄 New Puzzle
+</button>
+
+</div>
+
+
+<script>
+
+const SYMBOLS = [
+    "🐶",
+    "🐾",
+    "🍪",
+    "🦴"
+];
+
+const BASE_SOLUTION = [
+    0, 1, 2, 3,
+    2, 3, 0, 1,
+    1, 0, 3, 2,
+    3, 2, 1, 0
+];
+
+let solution = [];
+let puzzle = [];
+let selectedCell = null;
+
+
+/* SHUFFLE ARRAY */
+function shuffle(array) {
+
+    const copy = array.slice();
+
+    for(let i = copy.length - 1; i > 0; i--) {
+
+        const j =
+            Math.floor(Math.random() * (i + 1));
+
+        const temp = copy[i];
+        copy[i] = copy[j];
+        copy[j] = temp;
+
+    }
+
+    return copy;
+}
+
+
+/* CREATE A NEW VALID SOLUTION */
+function makeSolution() {
+
+    const shuffledSymbols =
+        shuffle([0, 1, 2, 3]);
+
+    solution =
+        BASE_SOLUTION.map(function(number) {
+            return shuffledSymbols[number];
+        });
+
+}
+
+
+/* CREATE PUZZLE */
+function makePuzzle() {
+
+    puzzle = solution.slice();
+
+    /*
+       Remove 7 squares.
+       Nine pictures remain as clues.
+    */
+
+    const positions =
+        shuffle([
+            0,1,2,3,
+            4,5,6,7,
+            8,9,10,11,
+            12,13,14,15
+        ]);
+
+    for(let i = 0; i < 7; i++) {
+        puzzle[positions[i]] = null;
+    }
+
+}
+
+
+/* DRAW GRID */
+function drawGrid() {
+
+    const grid =
+        document.getElementById("sudokuGrid");
+
+    grid.innerHTML = "";
+
+
+    for(let i = 0; i < 16; i++) {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "cell";
+
+
+        if(puzzle[i] !== null) {
+
+            button.innerText =
+                SYMBOLS[puzzle[i]];
+
+            button.classList.add("given");
+
+        }
+        else {
+
+            button.innerText = "";
+
+            button.onclick = function() {
+                selectCell(i);
+            };
+
+        }
+
+
+        if(selectedCell === i) {
+            button.classList.add("selected");
+        }
+
+
+        grid.appendChild(button);
+
+    }
+
+}
+
+
+/* SELECT EMPTY CELL */
+function selectCell(index) {
+
+    selectedCell = index;
+
+    drawGrid();
+
+    document.getElementById("message").innerText =
+        "👀 Which picture belongs here?";
+
+}
+
+
+/* CHOOSE SYMBOL */
+function chooseSymbol(symbol) {
+
+    if(selectedCell === null) {
+
+        document.getElementById("message").innerText =
+            "🐶 Tap an empty square first!";
+
+        return;
+
+    }
+
+
+    const symbolNumber =
+        SYMBOLS.indexOf(symbol);
+
+
+    if(symbolNumber === solution[selectedCell]) {
+
+        puzzle[selectedCell] = symbolNumber;
+
+        selectedCell = null;
+
+        document.getElementById("message").innerText =
+            "🎉 That's right!";
+
+        drawGrid();
+
+        checkWinner();
+
+    }
+    else {
+
+        document.getElementById("message").innerText =
+            "🐾 Not quite — try another picture!";
+
+    }
+
+}
+
+
+/* CHECK FOR FINISHED PUZZLE */
+function checkWinner() {
+
+    const finished =
+        puzzle.every(function(value, index) {
+            return value === solution[index];
+        });
+
+
+    if(finished) {
+
+        document.getElementById("message").innerHTML =
+            "🏆 <strong>PICTURE SUDOKU CHAMPION!</strong><br>" +
+            "You put every picture in the right place!";
+
+    }
+
+}
+
+
+/* NEW PUZZLE */
+function newPuzzle() {
+
+    selectedCell = null;
+
+    makeSolution();
+
+    makePuzzle();
+
+    drawGrid();
+
+    document.getElementById("message").innerText =
+        "🐾 Choose an empty square!";
+
+}
+
+
+/* START */
+newPuzzle();
+
+</script>
+
+</body>
+
+</html>
