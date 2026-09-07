@@ -1,1 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bailey & Dave Certificates</title>
+
+<style>
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff8ed;
+    color: #1f3557;
+    text-align: center;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 25px 12px;
+    flex-wrap: nowrap;
+}
+
+.nav-button {
+    background: white;
+    color: #1f3557;
+    border: none;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+    font-weight: bold;
+    padding: 14px 18px;
+    font-size: 18px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.hero {
+    background: linear-gradient(
+        135deg,
+        #f3e8ff 0%,
+        #fff1dc 50%,
+        #fff3b8 100%
+    );
+    padding: 30px 15px 25px;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: 2.2rem;
+}
+
+.hero p {
+    margin: 12px 0 0;
+    font-size: 1.05rem;
+}
+
+.builder {
+    max-width: 760px;
+    margin: 25px auto;
+    padding: 0 15px 40px;
+}
+
+.controls {
+    background: white;
+    padding: 20px;
+    border-radius: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+    margin-bottom: 25px;
+}
+
+.controls label {
+    display: block;
+    font-weight: bold;
+    margin: 12px 0 7px;
+}
+
+.controls select,
+.controls input {
+    width: min(90%, 420px);
+    padding: 12px 14px;
+    border: 2px solid #d8d8d8;
+    border-radius: 14px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.preview-button,
+.print-button {
+    border: none;
+    border-radius: 18px;
+    background: #1f3557;
+    color: white;
+    padding: 13px 22px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 14px 5px 0;
+}
+
+.certificate-wrap {
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.certificate {
+    width: 1000px;
+    height: 700px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    background:
+        linear-gradient(
+            135deg,
+            #fffdf8 0%,
+            #fff8ed 45%,
+            #f8f0ff 100%
+        );
+    border: 12px solid #1f3557;
+    outline: 5px solid #f3d86b;
+    outline-offset: -24px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 55px 65px;
+}
+
+.certificate::before {
+    content: "🐾";
+    position: absolute;
+    top: 35px;
+    left: 55px;
+    font-size: 52px;
+    transform: rotate(-20deg);
+}
+
+.certificate::after {
+    content: "🐾";
+    position: absolute;
+    bottom: 35px;
+    right: 55px;
+    font-size: 52px;
+    transform: rotate(20deg);
+}
+
+.brand {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.title {
+    font-size: 3.2rem;
+    margin: 12px 0 18px;
+}
+
+.awarded {
+    font-size: 1.35rem;
+    margin: 6px 0;
+}
+
+.name {
+    min-width: 520px;
+    padding: 10px 20px 8px;
+    border-bottom: 3px solid #1f3557;
+    font-size: 2.4rem;
+    font-weight: bold;
+    margin: 12px 0 18px;
+}
+
+.description {
+    max-width: 720px;
+    font-size: 1.5rem;
+    line-height: 1.5;
+}
+
+.art-placeholder {
+    margin: 24px 0 10px;
+    font-size: 2.3rem;
+}
+
+.footer {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.small-note {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+@media (max-width: 600px) {
+
+    .top-nav .nav-button {
+        padding: 12px 14px;
+        font-size: 16px;
+    }
+
+    .hero {
+        padding: 24px 12px 20px;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .certificate-wrap {
+        transform-origin: top left;
+    }
+
+    .certificate {
+        transform: scale(0.34);
+        transform-origin: top left;
+        margin-bottom: -450px;
+    }
+}
+
+@media print {
+
+    body {
+        background: white;
+    }
+
+    .top-nav,
+    .hero,
+    .controls,
+    .small-note {
+        display: none !important;
+    }
+
+    .builder {
+        margin: 0;
+        padding: 0;
+        max-width: none;
+    }
+
+    .certificate-wrap {
+        overflow: visible;
+    }
+
+    .certificate {
+        transform: none !important;
+        width: 297mm;
+        height: 210mm;
+        margin: 0;
+        page-break-inside: avoid;
+        border-width: 10px;
+    }
+
+    @page {
+        size: A4 landscape;
+        margin: 0;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="top-nav">
+
+<button class="nav-button"
+onclick="window.location.href='index.html'">
+🏠 Home
+</button>
+
+<button class="nav-button"
+onclick="window.location.href='activities.html'">
+🧩 Back to Activities
+</button>
+
+</div>
+
+
+<section class="hero">
+
+<h1>🏆 Bailey & Dave Certificates</h1>
+
+<p>
+Choose a certificate and make it your own!
+</p>
+
+</section>
+
+
+<div class="builder">
+
+<div class="controls">
+
+<label for="certificateType">
+Choose your certificate
+</label>
+
+<select id="certificateType">
+
+<option value="puzzle">
+🧩 Puzzle Champion
+</option>
+
+<option value="treat">
+🍪 Treat Counting Champion
+</option>
+
+<option value="maze">
+🐾 Maze Champion
+</option>
+
+<option value="adventure">
+🏆 Adventure Champion
+</option>
+
+</select>
+
+
+<label for="childName">
+First name
+</label>
+
+<input
+type="text"
+id="childName"
+placeholder="Type your name"
+maxlength="25"
+>
+
+
+<br>
+
+<button
+class="preview-button"
+onclick="updateCertificate()">
+✨ Make Certificate
+</button>
+
+<button
+class="print-button"
+onclick="printCertificate()">
+🖨️ Print Certificate
+</button>
+
+</div>
+
+
+<div class="certificate-wrap">
+
+<div id="certificate" class="certificate">
+
+<div class="brand">
+Bailey & Dave
+</div>
+
+<div id="certificateTitle" class="title">
+🧩 Puzzle Champion
+</div>
+
+<div class="awarded">
+This certificate is proudly awarded to
+</div>
+
+<div id="certificateName" class="name">
+Super Puzzle Solver
+</div>
+
+<div id="certificateDescription" class="description">
+For brilliant puzzle solving and completing the Bailey & Dave challenges.
+</div>
+
+<div class="art-placeholder">
+🐶 🐾 ⭐ 🐾 🐶
+</div>
+
+<div class="footer">
+Well done from Bailey & Dave!
+</div>
+
+</div>
+
+</div>
+
+
+<div class="small-note">
+Bailey & Dave artwork will be added here when the new character illustrations are ready.
+</div>
+
+</div>
+
+
+<script>
+
+const CERTIFICATES = {
+
+    puzzle: {
+        title: "🧩 Puzzle Champion",
+        description:
+            "For brilliant puzzle solving and completing the Bailey & Dave challenges."
+    },
+
+    treat: {
+        title: "🍪 Treat Counting Champion",
+        description:
+            "For fantastic counting and helping Bailey & Dave keep track of all those treats!"
+    },
+
+    maze: {
+        title: "🐾 Maze Champion",
+        description:
+            "For amazing maze skills and helping Bailey find his way through the Bailey & Dave challenges."
+    },
+
+    adventure: {
+        title: "🏆 Adventure Champion",
+        description:
+            "For exploring, playing and completing brilliant adventures with Bailey & Dave."
+    }
+
+};
+
+
+function updateCertificate() {
+
+    const type =
+        document.getElementById("certificateType").value;
+
+    const name =
+        document.getElementById("childName").value.trim();
+
+    const certificate =
+        CERTIFICATES[type];
+
+
+    document.getElementById("certificateTitle").innerText =
+        certificate.title;
+
+    document.getElementById("certificateDescription").innerText =
+        certificate.description;
+
+
+    if(name === "") {
+
+        document.getElementById("certificateName").innerText =
+            "Super Adventurer";
+
+    }
+    else {
+
+        document.getElementById("certificateName").innerText =
+            name;
+
+    }
+
+}
+
+
+function printCertificate() {
+
+    updateCertificate();
+
+    setTimeout(function() {
+        window.print();
+    }, 150);
+
+}
+
+
+document
+.getElementById("certificateType")
+.addEventListener(
+    "change",
+    updateCertificate
+);
+
+
+document
+.getElementById("childName")
+.addEventListener(
+    "input",
+    updateCertificate
+);
+
+
+updateCertificate();
+
+</script>
+
+</body>
+
+</html>
