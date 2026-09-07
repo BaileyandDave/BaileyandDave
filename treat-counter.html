@@ -280,14 +280,27 @@ function checkAnswer(number){
 
     document.getElementById("score").innerText = score;
 
-    document.getElementById("message").innerText =
-        "🎉 Well done! That's right!";
-
     document.getElementById("answers").innerHTML = "";
 
-    setTimeout(function(){
-        newQuestion();
-    }, 1200);
+    if(score >= 10){
+
+        document.getElementById("message").innerHTML =
+            "🏆 <strong>COUNTING CHAMPION!</strong><br>" +
+            "You helped Bailey & Dave count all their treats!<br>" +
+            "⭐ Score: " + score + "<br><br>" +
+            "<button onclick='restartGame()'>Play Again</button>";
+
+    }
+    else{
+
+        document.getElementById("message").innerText =
+            "🎉 Well done! That's right!";
+
+        setTimeout(function(){
+            newQuestion();
+        }, 1200);
+
+    }
 
 }
     else{
@@ -299,7 +312,16 @@ function checkAnswer(number){
 
 }
 
+function restartGame(){
 
+    score = 0;
+
+    document.getElementById("score").innerText = score;
+
+    document.getElementById("message").innerText = "";
+
+    newQuestion();
+}
 /* START GAME */
 newQuestion();
 
