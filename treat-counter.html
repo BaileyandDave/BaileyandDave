@@ -115,39 +115,70 @@ Treats Found: <span id="score">0</span>
 
 let score = 0;
 let answer = 0;
+let maxTreats = 5;
 
+/* CREATE THE LEVEL BUTTONS */
+const levelBox = document.createElement("div");
+
+levelBox.innerHTML =
+    "<h2>Choose a Level</h2>" +
+    "<button onclick='setLevel(5, \"Bailey Beginner\")'>🐶 Bailey Beginner<br>1–5</button>" +
+    "<button onclick='setLevel(10, \"Dave's Challenge\")'>🐾 Dave's Challenge<br>1–10</button>" +
+    "<button onclick='setLevel(20, \"Super Sausage\")'>🌭 Super Sausage<br>1–20</button>";
+
+document.getElementById("dogs").parentNode.insertBefore(
+    levelBox,
+    document.getElementById("dogs")
+);
+
+
+/* CHANGE DIFFICULTY */
+function setLevel(max, name) {
+
+    maxTreats = max;
+    score = 0;
+
+    document.getElementById("score").innerText = score;
+
+    document.getElementById("message").innerText =
+        "🎮 " + name + " selected!";
+
+    newQuestion();
+}
+
+
+/* CREATE A NEW QUESTION */
 function newQuestion(){
 
-    let bailey = Math.floor(Math.random()*6)+1;
-    let dave = Math.floor(Math.random()*6)+1;
+    let bailey = Math.floor(Math.random() * maxTreats) + 1;
+    let dave = Math.floor(Math.random() * maxTreats) + 1;
 
     answer = bailey + dave;
 
     document.getElementById("dogs").innerHTML =
 
-"<div class='dog-box'>" +
+        "<div class='dog-box'>" +
 
-"<div>" +
-"<h3>🐶 Bailey found:</h3>" +
-"<img src='../images/bailey-counter.png' class='dog-image'>" +
-"<p>" +
-"🍪".repeat(bailey) +
-"</p>" +
-"</div>" +
+        "<div>" +
+        "<h3>🐶 Bailey found:</h3>" +
+        "<img src='../images/bailey-counter.png' class='dog-image'>" +
+        "<p>" +
+        "🍪".repeat(bailey) +
+        "</p>" +
+        "</div>" +
 
-"<div>" +
-"<h3>🐾 Dave found:</h3>" +
-"<img src='../images/dave-counter.png' class='dog-image'>" +
-"<p>" +
-"🍪".repeat(dave) +
-"</p>" +
-"</div>" +
+        "<div>" +
+        "<h3>🐾 Dave found:</h3>" +
+        "<img src='../images/dave-counter.png' class='dog-image'>" +
+        "<p>" +
+        "🍪".repeat(dave) +
+        "</p>" +
+        "</div>" +
 
-"</div>";
+        "</div>";
 
-    document.getElementById("question").innerHTML =
-    bailey + " + " + dave + " = ?";
-
+    document.getElementById("question").innerText =
+        bailey + " + " + dave + " = ?";
 
     let options = [
         answer,
@@ -157,50 +188,55 @@ function newQuestion(){
 
     options.sort(() => Math.random() - 0.5);
 
-
     let buttons = "";
 
     options.forEach(function(number){
 
-        buttons += 
-        "<button onclick='checkAnswer(" + number + ")'>" 
-        + number +
-        "</button>";
+        buttons +=
+            "<button onclick='checkAnswer(" +
+            number +
+            ")'>" +
+            number +
+            "</button>";
 
     });
 
     document.getElementById("answers").innerHTML = buttons;
 
-    document.getElementById("message").innerHTML="";
-
+    document.getElementById("message").innerText = "";
 }
 
 
+/* CHECK THE CHILD'S ANSWER */
 function checkAnswer(number){
 
-    if(number == answer){
+    if(number === answer){
 
         score++;
 
-        document.getElementById("score").innerHTML = score;
+        document.getElementById("score").innerText = score;
 
-        document.getElementById("message").innerHTML =
-        "🎉 Well done! Bailey and Dave found the treats!";
+        document.getElementById("message").innerText =
+            "🎉 Well done! Bailey and Dave found the treats!";
 
     }
     else{
 
-        document.getElementById("message").innerHTML =
-        "🐶 Not quite! Have another try!";
+        document.getElementById("message").innerText =
+            "🐶 Not quite! Have another try!";
 
     }
 
 }
 
 
+/* START GAME */
 newQuestion();
 
 </script>
+
+
+    
 
 
 </body>
