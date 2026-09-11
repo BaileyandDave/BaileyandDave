@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-36CCQ17569"></script>
@@ -18,13 +18,22 @@ gtag('consent', 'default', {
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Discover Bailey & Dave children's picture books featuring silly sausage Bailey and cheeky pug Dave. Join their interactive adventures with stories, games and activities for young readers.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="Jack Smith">
 <title>Bailey & Dave Children's Books | Interactive Adventures for Kids</title>
 <link rel="canonical" href="https://baileyanddave.co.uk/">
   <meta property="og:title" content="Bailey & Dave | Interactive Children's Books">
 <meta property="og:description" content="Meet Bailey the silly sausage and Dave the cheeky pug. Discover their children's books, adventures, games, puzzles and activities.">
 <meta property="og:url" content="https://baileyanddave.co.uk/">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Bailey & Dave">
+  <meta property="og:locale" content="en_GB">
   <meta property="og:image" content="https://baileyanddave.co.uk/cover-book1.jpg">
+  <meta property="og:image:alt" content="Bailey and Dave children's picture book cover">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bailey & Dave | Interactive Children's Books">
+  <meta name="twitter:description" content="Interactive children's picture books featuring Bailey the silly sausage and Dave the cheeky pug.">
+  <meta name="twitter:image" content="https://baileyanddave.co.uk/cover-book1.jpg">
   <style>
 :root{
   --ink:#25313c; --cream:#fff9ef; --sun:#ffd76a; --coral:#ff8f79; --mint:#bdebd3;
@@ -143,16 +152,82 @@ padding:10px;
 </style>
   <script type="application/ld+json">
 {
- "@context":"https://schema.org",
- "@type":"BookSeries",
- "name":"Bailey & Dave",
- "author":{
-   "@type":"Person",
-   "name":"Jack Smith"
- },
- "description":"Interactive picture books featuring Bailey the silly sausage and Dave the cheeky pug.",
- "genre":"Children's books",
- "url":"https://baileyanddave.co.uk/"
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://baileyanddave.co.uk/#website",
+      "url": "https://baileyanddave.co.uk/",
+      "name": "Bailey & Dave",
+      "description": "Interactive children's picture books, games and activities featuring Bailey the silly sausage and Dave the cheeky pug.",
+      "inLanguage": "en-GB"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://baileyanddave.co.uk/#author",
+      "name": "Jack Smith"
+    },
+    {
+      "@type": "BookSeries",
+      "@id": "https://baileyanddave.co.uk/#series",
+      "name": "Bailey & Dave",
+      "url": "https://baileyanddave.co.uk/",
+      "author": {"@id": "https://baileyanddave.co.uk/#author"},
+      "description": "An interactive children's picture book series about Bailey, a timid miniature dachshund, and Dave, his brave and cheerful pug friend.",
+      "genre": ["Children's picture books", "Interactive fiction", "Dog stories"],
+      "inLanguage": "en-GB",
+      "hasPart": [
+        {"@id": "https://baileyanddave.co.uk/#book-one"},
+        {"@id": "https://baileyanddave.co.uk/#book-christmas"},
+        {"@id": "https://baileyanddave.co.uk/#book-park"},
+        {"@id": "https://baileyanddave.co.uk/#book-beach"}
+      ]
+    },
+    {
+      "@type": "Book",
+      "@id": "https://baileyanddave.co.uk/#book-one",
+      "name": "Bailey and Dave: Silly Sausage and Cheeky Pug",
+      "author": {"@id": "https://baileyanddave.co.uk/#author"},
+      "isPartOf": {"@id": "https://baileyanddave.co.uk/#series"},
+      "image": "https://baileyanddave.co.uk/cover-book1.jpg",
+      "url": "https://amzn.eu/d/0f6wpXOc",
+      "bookFormat": "https://schema.org/Paperback",
+      "inLanguage": "en-GB"
+    },
+    {
+      "@type": "Book",
+      "@id": "https://baileyanddave.co.uk/#book-christmas",
+      "name": "Bailey and Dave Save Christmas",
+      "author": {"@id": "https://baileyanddave.co.uk/#author"},
+      "isPartOf": {"@id": "https://baileyanddave.co.uk/#series"},
+      "image": "https://baileyanddave.co.uk/cover-christmas.jpg",
+      "url": "https://amzn.eu/d/0ic8WjaA",
+      "bookFormat": "https://schema.org/Paperback",
+      "inLanguage": "en-GB"
+    },
+    {
+      "@type": "Book",
+      "@id": "https://baileyanddave.co.uk/#book-park",
+      "name": "Bailey and Dave at the Park",
+      "author": {"@id": "https://baileyanddave.co.uk/#author"},
+      "isPartOf": {"@id": "https://baileyanddave.co.uk/#series"},
+      "image": "https://baileyanddave.co.uk/cover-park.jpg",
+      "url": "https://amzn.eu/d/0dtFh27V",
+      "bookFormat": "https://schema.org/Paperback",
+      "inLanguage": "en-GB"
+    },
+    {
+      "@type": "Book",
+      "@id": "https://baileyanddave.co.uk/#book-beach",
+      "name": "Bailey and Dave at the Beach",
+      "author": {"@id": "https://baileyanddave.co.uk/#author"},
+      "isPartOf": {"@id": "https://baileyanddave.co.uk/#series"},
+      "image": "https://baileyanddave.co.uk/cover-beach.jpg",
+      "url": "https://amzn.eu/d/04A4x4qe",
+      "bookFormat": "https://schema.org/Paperback",
+      "inLanguage": "en-GB"
+    }
+  ]
 }
   </script>
 </head>
@@ -212,7 +287,7 @@ padding:10px;
       <span class="badge">Kindle edition available</span>
       <h3>Bailey and Dave: Silly Sausage and Cheeky Pug</h3>
       <p>Meet Bailey the silly sausage dachshund and Dave the cheeky pug in their first interactive children's picture book adventure. Young readers can join in with the story, explore fun moments, and enjoy a playful reading experience filled with friendship, imagination and discovery.</p>
-      <a class="btn primary" href="https://amzn.eu/d/0f6wpXOc" aria-label="Amazon link placeholder">Buy on Amazon</a>
+      <a class="btn primary" href="https://amzn.eu/d/0f6wpXOc" aria-label="Buy Bailey and Dave: Silly Sausage and Cheeky Pug on Amazon" rel="noopener">Buy on Amazon</a>
     </article>
      <article class="book">
   <img class="book-cover" src="cover-christmas.jpg" alt="Bailey and Dave Save Christmas children's picture book">
@@ -221,26 +296,26 @@ padding:10px;
   <p>
 Join Bailey the silly sausage dachshund and Dave the cheeky pug on an interactive Christmas adventure. When something unexpected happens, the two friends discover that even the smallest dogs can make a big difference. A festive children's picture book filled with friendship, imagination, adventure and Christmas surprises.
 </p>
-  <a class="btn primary" href="https://amzn.eu/d/0ic8WjaA" aria-label="Buy Bailey and Dave Save Christmas on Amazon">Buy on Amazon</a>
+  <a class="btn primary" href="https://amzn.eu/d/0ic8WjaA" aria-label="Buy Bailey and Dave Save Christmas on Amazon" rel="noopener">Buy on Amazon</a>
 </article>
 
 <article class="book">
-  <img class="book-cover" src="cover-park.jpg" alt="Bailey and Dave at the Park cover">
+  <img class="book-cover" src="cover-park.jpg" alt="Bailey and Dave at the Park children's picture book cover">
   <span class="badge">Kindle edition available</span>
   <h3>Bailey and Dave at the Park</h3>
   <p>
 Join Bailey the silly sausage dachshund and Dave the cheeky pug on a fun interactive adventure at the park. Explore the outdoors with two lovable dogs as they discover new friends, solve little challenges and enjoy a playful children's picture book experience filled with imagination and friendship.
 </p>
-  <a class="btn primary" href="https://amzn.eu/d/0dtFh27V" aria-label="Buy Bailey and Dave at the Park on Amazon">Buy on Amazon</a>
+  <a class="btn primary" href="https://amzn.eu/d/0dtFh27V" aria-label="Buy Bailey and Dave at the Park on Amazon" rel="noopener">Buy on Amazon</a>
 </article>
     <article class="book">
-  <img class="book-cover" src="cover-beach.jpg" alt="Bailey and Dave at the Beach">
+  <img class="book-cover" src="cover-beach.jpg" alt="Bailey and Dave at the Beach children's picture book cover">
   <span class="badge">Kindle edition</span>
   <h3>Bailey &amp; Dave at the Beach</h3>
   <p>
 Join Bailey the silly sausage dachshund and Dave the cheeky pug for a seaside adventure in this interactive children's picture book. Explore the beach with the two friends as they discover a surprising new friend, solve fun challenges and create another special memory together.
 </p>
-  <a class="btn primary" href="https://amzn.eu/d/04A4x4qe">Buy on Amazon</a>
+  <a class="btn primary" href="https://amzn.eu/d/04A4x4qe" aria-label="Buy Bailey and Dave at the Beach on Amazon" rel="noopener">Buy on Amazon</a>
     </article>
   </div>
 </div></section>
