@@ -85,7 +85,7 @@ section{padding:48px 0}
 .help-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .help-card{background:#fff;border-radius:20px;padding:18px;text-align:center;border:2px solid #e4e8ea}
 .icon{font-size:2rem}
-.coming{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.coming{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .coming-card{min-height:160px;border-radius:22px;padding:22px;display:flex;flex-direction:column;justify-content:flex-end;border:3px solid var(--ink);box-shadow:var(--shadow);font-weight:900}
 .beach{background:linear-gradient(#bfe8ff 45%,#ffe6a3 45%)} .zoo{background:linear-gradient(135deg,#ccefcf,#fff0a8)} .london{background:linear-gradient(135deg,#d8e5ff,#ffcbc7)}
 .memory{background:#fff;border:3px solid var(--ink);border-radius:28px;padding:24px;box-shadow:var(--shadow)}
@@ -149,6 +149,84 @@ padding:10px;
 }
 
 }
+
+/* --- Christmas promotion --- */
+.christmas-promo{
+  margin:10px auto 18px;
+  background:linear-gradient(135deg,#fffdf8 0%,#f7fff8 52%,#fff7f7 100%);
+  border:3px solid var(--ink);
+  border-radius:28px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  position:relative;
+}
+.christmas-promo::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(circle at 12% 18%,rgba(180,20,30,.10),transparent 18%),
+    radial-gradient(circle at 88% 14%,rgba(24,126,62,.12),transparent 20%);
+  pointer-events:none;
+}
+.christmas-inner{
+  position:relative;
+  display:grid;
+  grid-template-columns:.72fr 1.28fr;
+  gap:24px;
+  align-items:center;
+  padding:24px;
+}
+.christmas-cover{
+  width:100%;
+  max-width:300px;
+  justify-self:center;
+  border-radius:18px;
+  border:3px solid #e3e8eb;
+  box-shadow:0 10px 22px rgba(37,49,60,.16);
+}
+.christmas-kicker{
+  display:inline-flex;
+  background:#b71922;
+  color:white;
+  border-radius:999px;
+  padding:7px 12px;
+  font-weight:900;
+  letter-spacing:.4px;
+  margin-bottom:8px;
+}
+.christmas-promo h2{
+  margin:.2rem 0 .45rem;
+  font-size:clamp(2rem,5vw,3.4rem);
+  line-height:1;
+}
+.christmas-promo .btn.primary{background:#dff2df}
+.christmas-promo .btn.alt{background:#fff}
+.christmas-note{font-weight:800;color:#8f1420}
+#snow-layer{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:9998;
+  overflow:hidden;
+}
+.snowflake{
+  position:absolute;
+  top:-10vh;
+  color:white;
+  text-shadow:0 1px 3px rgba(0,0,0,.18);
+  user-select:none;
+  animation:snowfall linear infinite;
+  opacity:.9;
+}
+@keyframes snowfall{
+  to{ transform:translate3d(var(--drift),110vh,0) rotate(360deg); }
+}
+@media(max-width:800px){
+  .christmas-inner{grid-template-columns:1fr;text-align:center}
+  .christmas-cover{max-width:240px}
+  .christmas-promo .cta-row{justify-content:center}
+}
+
 </style>
   <script type="application/ld+json">
 {
@@ -180,7 +258,8 @@ padding:10px;
         {"@id": "https://baileyanddave.co.uk/#book-one"},
         {"@id": "https://baileyanddave.co.uk/#book-christmas"},
         {"@id": "https://baileyanddave.co.uk/#book-park"},
-        {"@id": "https://baileyanddave.co.uk/#book-beach"}
+        {"@id": "https://baileyanddave.co.uk/#book-beach"},
+        {"@id": "https://baileyanddave.co.uk/#book-zoo"}
       ]
     },
     {
@@ -226,12 +305,23 @@ padding:10px;
       "url": "https://amzn.eu/d/04A4x4qe",
       "bookFormat": "https://schema.org/Paperback",
       "inLanguage": "en-GB"
+    },
+    {
+      "@type": "Book",
+      "@id": "https://baileyanddave.co.uk/#book-zoo",
+      "name": "Bailey and Dave at the Zoo",
+      "author": {"@id": "https://baileyanddave.co.uk/#author"},
+      "isPartOf": {"@id": "https://baileyanddave.co.uk/#series"},
+      "image": "https://baileyanddave.co.uk/cover-zoo.jpg",
+      "bookFormat": "https://schema.org/Paperback",
+      "inLanguage": "en-GB"
     }
   ]
 }
   </script>
 </head>
 <body>
+<div id="snow-layer" aria-hidden="true"></div>
 <header><div class="wrap"><nav>
   <div class="brand">BAILEY &amp; DAVE</div>
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
@@ -279,6 +369,23 @@ padding:10px;
   </div>
 </div></section>
 
+
+<section class="wrap christmas-promo" aria-label="Christmas special">
+  <div class="christmas-inner">
+    <img class="christmas-cover" src="cover-christmas.jpg" alt="Bailey and Dave Save Christmas children's picture book cover">
+    <div>
+      <div class="christmas-kicker">🎄 CHRISTMAS ADVENTURE 🎄</div>
+      <h2>Bailey &amp; Dave Save Christmas</h2>
+      <p class="christmas-note">A festive Bailey &amp; Dave adventure for little readers this Christmas.</p>
+      <p>Join Bailey the silly sausage and Dave the cheeky pug as they discover that even the smallest dogs can make a big difference when Christmas needs a helping paw.</p>
+      <div class="cta-row">
+        <a class="btn alt" href="save-christmas.html">Explore the Christmas book</a>
+        <a class="btn primary" href="https://amzn.eu/d/0ic8WjaA" aria-label="Buy Bailey and Dave Save Christmas on Amazon" rel="noopener">🎁 Buy on Amazon</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="books"><div class="wrap">
   <div class="section-title"><h2>Bailey & Dave Children's Books</h2><p>Join Bailey and Dave in their interactive adventures.</p></div>
   <div class="books">
@@ -321,23 +428,25 @@ Join Bailey the silly sausage dachshund and Dave the cheeky pug for a seaside ad
   <a class="btn alt" href="at-the-beach.html">Explore this book</a>
   <a class="btn primary" href="https://amzn.eu/d/04A4x4qe" aria-label="Buy Bailey and Dave at the Beach on Amazon" rel="noopener">Buy on Amazon</a>
     </article>
+
+    <article class="book">
+      <img class="book-cover" src="cover-zoo.jpg" alt="Bailey and Dave at the Zoo children's picture book cover">
+      <span class="badge">New adventure</span>
+      <h3>Bailey &amp; Dave at the Zoo</h3>
+      <p>Join Bailey the silly sausage dachshund and Dave the cheeky pug for a fun-filled zoo adventure. Meet amazing animals, make new friends and enjoy another playful interactive picture book experience together.</p>
+      <a class="btn alt" href="#zoo-feature">Discover the zoo adventure</a>
+    </article>
   </div>
 </div></section>
 
   <section id="zoo-feature">
 <div class="wrap">
-
-<div class="section-title">
-<h2>🦒 Bailey & Dave at the Zoo</h2>
+  <div class="section-title">
+    <h2>🦒 The Zoo Adventure Has Arrived!</h2>
+    <p>Bailey and Dave are off to the zoo for their latest adventure.</p>
+  </div>
 </div>
-
-<p>
-Bailey and Dave are getting ready for their next children's picture book adventure at the zoo. 
-Join the silly sausage and cheeky pug as they discover amazing animals, make new friends and explore another interactive adventure.
-</p>
-
-</div>
-  </section>
+</section>
 <section id="help"><div class="wrap">
   <div class="section-title"><h2>Can You Help Bailey &amp; Dave?</h2><p>Every adventure invites the child into the story.</p></div>
   <div class="help-grid">
@@ -351,7 +460,6 @@ Join the silly sausage and cheeky pug as they discover amazing animals, make new
 <section id="coming"><div class="wrap">
   <div class="section-title"><h2>Where Are They Going Next?</h2></div>
   <div class="coming">
-    <div class="coming-card zoo"><div>🦒</div><h3>Bailey &amp; Dave at the Zoo</h3><span>In development</span></div>
     <div class="coming-card london"><div>🇬🇧</div><h3>Bailey &amp; Dave Visit London</h3><span>Future adventure</span></div>
     <div class="coming-card circus"><div>🎪</div><strong>Bailey &amp; Dave at the Circus</strong><br>In development</div>
   </div>
@@ -391,7 +499,7 @@ problem solving and a love of reading.
 
 <p>
 Explore adventures including Bailey and Dave at the Park, Bailey and Dave Save Christmas,
-and Bailey and Dave at the Beach, with more exciting stories coming soon.
+Bailey and Dave at the Beach and Bailey and Dave at the Zoo, with more exciting stories coming soon.
 </p>
 
 <p style="margin-top:18px;">
@@ -459,4 +567,24 @@ function toggleMenu(){
 document.getElementById("mobileMenu").classList.toggle("show");
 }
   </script>
+
+<script>
+(function(){
+  const layer = document.getElementById('snow-layer');
+  if(!layer) return;
+  const count = window.innerWidth < 700 ? 24 : 42;
+  for(let i=0;i<count;i++){
+    const flake=document.createElement('span');
+    flake.className='snowflake';
+    flake.textContent = Math.random() > .55 ? '❄' : '•';
+    flake.style.left=(Math.random()*100)+'vw';
+    flake.style.fontSize=(10+Math.random()*16)+'px';
+    flake.style.animationDuration=(8+Math.random()*10)+'s';
+    flake.style.animationDelay=(-Math.random()*14)+'s';
+    flake.style.setProperty('--drift',((Math.random()*80)-40)+'px');
+    layer.appendChild(flake);
+  }
+})();
+</script>
+
 </body></html>
