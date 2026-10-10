@@ -1,6 +1,18 @@
 <!doctype html>
 <html lang="en-GB">
 <head>
+<!-- Google Analytics: consent defaults to denied until visitor opts in -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-36CCQ17569"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{
+  analytics_storage:'denied', ad_storage:'denied',
+  ad_user_data:'denied', ad_personalization:'denied'
+});
+gtag('js',new Date());
+gtag('config','G-36CCQ17569');
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Join Bailey the silly sausage and Dave the cheeky pug in Bailey and Dave Save Christmas, an interactive festive children's picture book by Jack Smith.">
@@ -34,10 +46,42 @@
 <p class="lead">Something unexpected has happened—and even the smallest dogs can make a big difference.</p>
 <p>Bailey the silly sausage and Dave the cheeky pug return in an interactive Christmas picture book filled with friendship, imagination and festive surprises.</p>
 <div class="panel"><h2>Can you help Bailey and Dave?</h2><p>Young readers join in as the two best friends face another unusual adventure. Bailey may need some lucky ear tickles before he feels brave enough to continue.</p></div>
-<a class="btn" href="https://amzn.eu/d/0ic8WjaA" rel="noopener">Buy on Amazon</a>
-<a class="btn" href="activities.html">Play free activities</a>
+<a class="btn" data-track="amazon" href="https://amzn.eu/d/0ic8WjaA" rel="noopener">Buy on Amazon</a>
+<a class="btn" data-track="activities" href="activities.html">Play free activities</a>
 </article>
 </main>
 <footer><div class="wrap">© 2026 Bailey &amp; Dave · Written by Jack Smith</div></footer>
+<div id="cookie-banner" role="dialog" aria-label="Analytics cookie preferences" style="position:fixed;bottom:0;left:0;right:0;background:#fff9ef;border-top:3px solid #25313c;padding:16px;z-index:9999;text-align:center;display:none">
+  <strong>Cookies on Bailey &amp; Dave</strong>
+  <p style="margin:8px 0">We use optional Google Analytics cookies to understand visits and book-button clicks. Accept or reject analytics cookies.</p>
+  <button type="button" id="accept-analytics" style="padding:10px 16px;margin:5px;font-weight:bold">Accept analytics</button>
+  <button type="button" id="reject-analytics" style="padding:10px 16px;margin:5px;font-weight:bold">Reject</button>
+</div>
+<script>
+(function(){
+  const banner=document.getElementById('cookie-banner');
+  const consentKey='analyticsConsent'; // Same key used on main Bailey & Dave homepage.
+  let saved;
+  try { saved=localStorage.getItem(consentKey); } catch(e) { saved=null; }
+  if(saved==='granted') gtag('consent','update',{analytics_storage:'granted'});
+  else if(saved!=='denied') banner.style.display='block';
+  function choose(value){
+    gtag('consent','update',{analytics_storage:value});
+    try { localStorage.setItem(consentKey,value); } catch(e) {}
+    banner.style.display='none';
+  }
+  document.getElementById('accept-analytics').addEventListener('click',()=>choose('granted'));
+  document.getElementById('reject-analytics').addEventListener('click',()=>choose('denied'));
+  document.querySelectorAll('[data-track]').forEach(link=>{
+    link.addEventListener('click',()=>{
+      if(link.dataset.track==='amazon') {
+        gtag('event','christmas_amazon_click',{book:'Bailey and Dave Save Christmas',link_url:link.href});
+      } else if(link.dataset.track==='activities') {
+        gtag('event','christmas_activities_click',{link_url:link.href});
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>
