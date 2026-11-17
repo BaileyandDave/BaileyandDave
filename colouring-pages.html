@@ -29,7 +29,7 @@ h2{font-size:1.5rem;margin:12px 0 8px}
 .note{font-size:.95rem;text-align:center;margin:32px auto 0;max-width:650px}
 footer{background:var(--ink);color:white;padding:24px 0;font-size:.9rem;text-align:center}
 @media(max-width:700px){.grid{grid-template-columns:1fr}.card{padding:20px}.card p{min-height:0}}
-.sheet-preview{display:block;width:min(100%,235px);aspect-ratio:3/4;margin:0 auto 18px;border:2px solid #e4e8ea;background:#fff;border-radius:12px;overflow:hidden;text-decoration:none;color:var(--ink);position:relative;box-shadow:0 5px 14px rgba(37,49,60,.1)}.sheet-preview object{pointer-events:none;border:0;width:100%;height:100%;display:block}.preview-fallback{display:flex;height:100%;align-items:center;justify-content:center;padding:16px;font-weight:bold}.sheet-preview:hover,.sheet-preview:focus-visible{outline:3px solid var(--purple);outline-offset:3px}.symbol{display:none}
+.sheet-preview{display:block;width:min(100%,235px);aspect-ratio:3/4;margin:0 auto 18px;border:2px solid #e4e8ea;background:#fff;border-radius:12px;overflow:hidden;text-decoration:none;color:var(--ink);position:relative;box-shadow:0 5px 14px rgba(37,49,60,.1)}.pdf-thumb{width:100%;height:100%;display:none;object-fit:contain;background:white}.pdf-thumb.ready{display:block}.sheet-preview:has(.pdf-thumb.ready) .preview-fallback{display:none}.preview-fallback{display:flex;height:100%;align-items:center;justify-content:center;padding:16px;font-weight:bold}.sheet-preview:hover,.sheet-preview:focus-visible{outline:3px solid var(--purple);outline-offset:3px}.symbol{display:none}
 </style>
 </head>
 <body>
@@ -48,14 +48,38 @@ footer{background:var(--ink);color:white;padding:24px 0;font-size:.9rem;text-ali
 <p>Choose a picture, download its free PDF, then print it to colour at home. Perfect for little artists and budding adventurers!</p>
 </div>
 <section class="grid" aria-label="Downloadable colouring sheets">
-<article class="card"><a class="sheet-preview" href="bailey-dave-at-home.pdf" target="_blank" rel="noopener" aria-label="Preview At Home colouring sheet"><object data="bailey-dave-at-home.pdf#page=1&toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf" tabindex="-1" aria-hidden="true"><span class="preview-fallback">📄 View At Home drawing</span></object></a><div class="symbol" aria-hidden="true">🏠</div><h2>At Home</h2><p>Bailey and Dave enjoy some fun outside their house.</p><a class="btn" href="bailey-dave-at-home.pdf" download>⬇ Download PDF</a></article>
-<article class="card"><a class="sheet-preview" href="bailey-dave-at-the-park.pdf" target="_blank" rel="noopener" aria-label="Preview At the Park colouring sheet"><object data="bailey-dave-at-the-park.pdf#page=1&toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf" tabindex="-1" aria-hidden="true"><span class="preview-fallback">📄 View At the Park drawing</span></object></a><div class="symbol" aria-hidden="true">🦆</div><h2>At the Park</h2><p>Join Bailey and Dave as they watch the ducks.</p><a class="btn" href="bailey-dave-at-the-park.pdf" download>⬇ Download PDF</a></article>
-<article class="card"><a class="sheet-preview" href="bailey-dave-christmas.pdf" target="_blank" rel="noopener" aria-label="Preview Save Christmas colouring sheet"><object data="bailey-dave-christmas.pdf#page=1&toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf" tabindex="-1" aria-hidden="true"><span class="preview-fallback">📄 View Save Christmas drawing</span></object></a><div class="symbol" aria-hidden="true">🎄</div><h2>Save Christmas</h2><p>Add colour to their magical snowy Christmas adventure.</p><a class="btn" href="bailey-dave-christmas.pdf" download>⬇ Download PDF</a></article>
-<article class="card"><a class="sheet-preview" href="bailey-dave-at-the-zoo.pdf" target="_blank" rel="noopener" aria-label="Preview At the Zoo colouring sheet"><object data="bailey-dave-at-the-zoo.pdf#page=1&toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf" tabindex="-1" aria-hidden="true"><span class="preview-fallback">📄 View At the Zoo drawing</span></object></a><div class="symbol" aria-hidden="true">🦒</div><h2>At the Zoo</h2><p>Colour the giraffes and everything Bailey and Dave discover.</p><a class="btn" href="bailey-dave-at-the-zoo.pdf" download>⬇ Download PDF</a></article>
-<article class="card"><a class="sheet-preview" href="bailey-dave-at-the-beach.pdf" target="_blank" rel="noopener" aria-label="Preview At the Beach colouring sheet"><object data="bailey-dave-at-the-beach.pdf#page=1&toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf" tabindex="-1" aria-hidden="true"><span class="preview-fallback">📄 View At the Beach drawing</span></object></a><div class="symbol" aria-hidden="true">🏖️</div><h2>At the Beach</h2><p>Help Bailey, Dave and Mr Crab bring their treasure hunt to life.</p><a class="btn" href="bailey-dave-at-the-beach.pdf" download>⬇ Download PDF</a></article>
+<article class="card"><a class="sheet-preview" href="bailey-dave-at-home.pdf" target="_blank" rel="noopener" aria-label="Open At Home colouring sheet"><canvas class="pdf-thumb" data-pdf="bailey-dave-at-home.pdf" role="img" aria-label="At Home colouring sheet drawing"></canvas><span class="preview-fallback">📄 Tap to view At Home colouring sheet</span></a><div class="symbol" aria-hidden="true">🏠</div><h2>At Home</h2><p>Bailey and Dave enjoy some fun outside their house.</p><a class="btn" href="bailey-dave-at-home.pdf" download>⬇ Download PDF</a></article>
+<article class="card"><a class="sheet-preview" href="bailey-dave-at-the-park.pdf" target="_blank" rel="noopener" aria-label="Open At the Park colouring sheet"><canvas class="pdf-thumb" data-pdf="bailey-dave-at-the-park.pdf" role="img" aria-label="At the Park colouring sheet drawing"></canvas><span class="preview-fallback">📄 Tap to view At the Park colouring sheet</span></a><div class="symbol" aria-hidden="true">🦆</div><h2>At the Park</h2><p>Join Bailey and Dave as they watch the ducks.</p><a class="btn" href="bailey-dave-at-the-park.pdf" download>⬇ Download PDF</a></article>
+<article class="card"><a class="sheet-preview" href="bailey-dave-christmas.pdf" target="_blank" rel="noopener" aria-label="Open Save Christmas colouring sheet"><canvas class="pdf-thumb" data-pdf="bailey-dave-christmas.pdf" role="img" aria-label="Save Christmas colouring sheet drawing"></canvas><span class="preview-fallback">📄 Tap to view Save Christmas colouring sheet</span></a><div class="symbol" aria-hidden="true">🎄</div><h2>Save Christmas</h2><p>Add colour to their magical snowy Christmas adventure.</p><a class="btn" href="bailey-dave-christmas.pdf" download>⬇ Download PDF</a></article>
+<article class="card"><a class="sheet-preview" href="bailey-dave-at-the-zoo.pdf" target="_blank" rel="noopener" aria-label="Open At the Zoo colouring sheet"><canvas class="pdf-thumb" data-pdf="bailey-dave-at-the-zoo.pdf" role="img" aria-label="At the Zoo colouring sheet drawing"></canvas><span class="preview-fallback">📄 Tap to view At the Zoo colouring sheet</span></a><div class="symbol" aria-hidden="true">🦒</div><h2>At the Zoo</h2><p>Colour the giraffes and everything Bailey and Dave discover.</p><a class="btn" href="bailey-dave-at-the-zoo.pdf" download>⬇ Download PDF</a></article>
+<article class="card"><a class="sheet-preview" href="bailey-dave-at-the-beach.pdf" target="_blank" rel="noopener" aria-label="Open At the Beach colouring sheet"><canvas class="pdf-thumb" data-pdf="bailey-dave-at-the-beach.pdf" role="img" aria-label="At the Beach colouring sheet drawing"></canvas><span class="preview-fallback">📄 Tap to view At the Beach colouring sheet</span></a><div class="symbol" aria-hidden="true">🏖️</div><h2>At the Beach</h2><p>Help Bailey, Dave and Mr Crab bring their treasure hunt to life.</p><a class="btn" href="bailey-dave-at-the-beach.pdf" download>⬇ Download PDF</a></article>
 </section>
 <p class="note">These colouring sheets are free to print for personal, non-commercial use. Artwork © Bailey &amp; Dave. A grown-up can help with downloading and printing.</p>
 </main>
 <footer><div class="wrap">© 2026 Bailey &amp; Dave. One silly sausage. One cheeky pug. Lots of adventures.</div></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', async function () {
+  if (!window.pdfjsLib) return;
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  const canvases = document.querySelectorAll('canvas.pdf-thumb');
+  for (const canvas of canvases) {
+    try {
+      const pdf = await pdfjsLib.getDocument(canvas.dataset.pdf).promise;
+      const page = await pdf.getPage(1);
+      const viewport = page.getViewport({scale:1});
+      const ratio = Math.min(650 / viewport.width, 850 / viewport.height);
+      const scaled = page.getViewport({scale:ratio});
+      canvas.width = Math.ceil(scaled.width);
+      canvas.height = Math.ceil(scaled.height);
+      await page.render({canvasContext:canvas.getContext('2d'),viewport:scaled}).promise;
+      canvas.classList.add('ready');
+      await pdf.destroy();
+    } catch (error) {
+      console.warn('Colouring sheet preview unavailable:', canvas.dataset.pdf, error);
+    }
+  }
+});
+</script>
 </body>
 </html>
